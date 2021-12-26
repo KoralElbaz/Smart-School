@@ -20,7 +20,7 @@ import java.util.HashMap;
 public class updateGrades extends AppCompatActivity {
 
     private FirebaseDatabase database;
-    private DatabaseReference ClassRoom;
+    private DatabaseReference Lesson;
 
     private Button updateBtn;
     private TextView fullName, id, email ;
@@ -34,7 +34,7 @@ public class updateGrades extends AppCompatActivity {
         setContentView(R.layout.activity_update_grades);
 
         database = FirebaseDatabase.getInstance();
-        ClassRoom = database.getReference("ClassRoom");
+        Lesson = database.getReference("ClassRoom");
 
         updateBtn=findViewById(R.id.updateBtn);
         fullName = findViewById(R.id.fill1);
@@ -77,10 +77,10 @@ public class updateGrades extends AppCompatActivity {
                     if(!input4.equals("")){hashMap.put("Hebrew",input4);}
                     if(!input5.equals("")){hashMap.put("Math",input5);}
 
-                    ClassRoom.child(uid).child("courses_with_grade").updateChildren(hashMap).addOnSuccessListener(new OnSuccessListener() {
+                    Lesson.child(uid).child("courses_with_grade").updateChildren(hashMap).addOnSuccessListener(new OnSuccessListener() {
                         @Override
                         public void onSuccess(Object o) {
-                            ClassRoom.child(uid).child("update_grade").setValue(true);
+                            Lesson.child(uid).child("update_grade").setValue(true);
                             Toast.makeText(updateGrades.this, "Update Successfully", Toast.LENGTH_LONG).show();
                         }
                     });

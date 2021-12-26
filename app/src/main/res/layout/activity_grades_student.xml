@@ -25,132 +25,14 @@
             />
 
 
-        <!--שורה 1-->
-        <TextView
-            android:id="@+id/bible"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+        <ListView
+            android:id="@+id/listview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:layout_below="@+id/gradesTitle"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="150dp"
-            android:text="Bible:"
-            android:textSize="30dp"
-            android:textStyle="bold"
-            />
-
-
-
-        <TextView
-            android:id="@+id/fill1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/gradesTitle"
-            android:layout_marginLeft="190dp"
-            android:layout_marginTop="150dp"
-            android:text=""
-            android:textSize="30dp" />
-
-
-        <!--שורה 2-->
-
-        <TextView
-            android:id="@+id/computer"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/bible"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="20dp"
-            android:text="Computer:"
-            android:textSize="30dp"
-            android:textStyle="bold"
-            />
-
-        <TextView
-            android:id="@+id/fill2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/fill1"
-            android:layout_marginLeft="190dp"
-            android:layout_marginTop="20dp"
-            android:text=""
-            android:textSize="30dp"
-            />
-
-
-        <!--שורה 3-->
-
-
-        <TextView
-            android:id="@+id/english"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/computer"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="20dp"
-            android:text="English:"
-            android:textSize="30dp"
-            android:textStyle="bold"
-            />
-
-        <TextView
-            android:id="@+id/fill3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/fill2"
-            android:layout_marginLeft="190dp"
-            android:layout_marginTop="20dp"
-            android:text=""
-            android:textSize="30dp"
-            />
-
-        <!--שורה 4-->
-
-
-        <TextView
-            android:id="@+id/hebrew"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/english"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="20dp"
-            android:text="Hebrew:"
-            android:textSize="30dp"
-            android:textStyle="bold"
-            />
-
-        <TextView
-            android:id="@+id/fill4"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/fill3"
-            android:layout_marginLeft="190dp"
-            android:layout_marginTop="20dp"
-            android:text=""
-            android:textSize="30dp"
-            />
-
-        <!-- שורה 5 -->
-        <TextView
-            android:id="@+id/math"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/hebrew"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="20dp"
-            android:text="Math:"
-            android:textSize="30dp"
-            android:textStyle="bold"
-            />
-
-        <TextView
-            android:id="@+id/fill5"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/fill4"
-            android:layout_marginLeft="190dp"
-            android:layout_marginTop="20dp"
-            android:text=""
-            android:textSize="30dp"
-            />
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="120dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginBottom="20dp" />
 
 </RelativeLayout>

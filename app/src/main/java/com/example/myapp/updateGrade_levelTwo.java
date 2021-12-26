@@ -1,8 +1,6 @@
 package com.example.myapp;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -11,7 +9,9 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import com.google.android.gms.tasks.OnSuccessListener;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -21,34 +21,50 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
-public class PlacementStudent4 extends AppCompatActivity {
-
+public class updateGrade_levelTwo extends AppCompatActivity {
     private FirebaseDatabase database;
     private DatabaseReference Teachers;
     private DatabaseReference Lessons;
-    private Teacher teacher;
+    private FirebaseAuth sAuth;
+    private String lessonName;
+    private Student student;
     ListView listView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_placement_student4);
-
-        database = FirebaseDatabase.getInstance();
-        Teachers = database.getReference("Teachers");
-        Lessons = database.getReference("Lessons");
-
+        setContentView(R.layout.activity_placement_student2);
 
         database = FirebaseDatabase.getInstance();
         listView=(ListView) findViewById(R.id.listview);
-        teacher=new Teacher();
+        Teachers = database.getReference("Teachers");
+        Lessons = database.getReference("Lessons");
+        sAuth = FirebaseAuth.getInstance();
+        student=new Student();
+
+        Teachers.addValueEventListener(new ValueEventListener() {
+            @SuppressLint("SetTextI18n")
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for(DataSnapshot ds: snapshot.getChildren()){
+                    if(ds.hasChild(Objects.requireNonNull(sAuth.getUid()))){
+                        Teacher t = new Teacher();
+                        lessonName=Objects.requireNonNull(ds.child(sAuth.getUid()).getValue(Teacher.class)).getName_lesson();
+                    }
+                }
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
 
         ArrayList<String> emailList=new ArrayList<>();
         ArrayList<String> uidList=new ArrayList<>();
-        Map<String,Object> map=new HashMap<>();
+        Map<String,Student> studentMap=new HashMap<>();
 
 
 
@@ -59,21 +75,15 @@ public class PlacementStudent4 extends AppCompatActivity {
         if(intent!=null)
         {
             String grade = intent.getStringExtra("grade");
-            String uidStudent=intent.getStringExtra("uidStudent");
-            String emailStudent=intent.getStringExtra("emailStudent");
-            String Lesson_name=intent.getStringExtra("Lesson_name");
 
-
-
-            Teachers.child(Lesson_name).addValueEventListener(new ValueEventListener() {
+            Lessons.child(lessonName).child(grade).addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
                     for(DataSnapshot ds :snapshot.getChildren()){
-                        teacher = ds.getValue(Teacher.class);
-                        emailList.add(teacher.getEmail());
-                        uidList.add(teacher.getFbUID());
-
-
+                        student = ds.getValue(Student.class);
+                        emailList.add(student.getEmail());
+                        uidList.add(student.getFbUID());
+                        studentMap.put(student.getFbUID(),student);
                     }
                     listView.setAdapter(arrayAdapter);
                 }
@@ -85,30 +95,19 @@ public class PlacementStudent4 extends AppCompatActivity {
             });
 
 
-
             listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id)
                 {
 
-                    HashMap hashMap=new HashMap();
-                    hashMap.put(uidStudent,"");
-                    Lessons.child(Lesson_name).child("students_CourseGrade").updateChildren(hashMap).addOnSuccessListener(new OnSuccessListener() {
-                        @Override
-                        public void onSuccess(Object o) {
-                            HashMap hashMap2=new HashMap();
-                            hashMap2.put(uidList.get(position),Lesson_name);
-                            Lessons.child(Lesson_name).child("teacher_LessonName").updateChildren(hashMap2).addOnSuccessListener(new OnSuccessListener() {
-                                @Override
-                                public void onSuccess(Object o) {
-                                    Toast.makeText(PlacementStudent4.this, "The Placement Successfully", Toast.LENGTH_LONG).show();
-                                    Intent i = new Intent(getApplicationContext(),PlacementStudent.class);
-                                    startActivity(i);
-                                }
-                            });
-                        }
-                    });
+                    Toast.makeText(updateGrade_levelTwo.this, "-> "+emailList.get(position), Toast.LENGTH_SHORT).show();
+
+                    Intent i = new Intent(getApplicationContext(),updateGrades.class);
+                    i.putExtra("grade",grade);
+                    i.putExtra("uid",uidList.get(position));
+                    i.putExtra("email",emailList.get(position));
+                    startActivity(i);
+
                 }
             });
         }

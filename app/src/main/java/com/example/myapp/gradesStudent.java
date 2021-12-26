@@ -2,6 +2,8 @@ package com.example.myapp;
 
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -18,16 +20,18 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
+import java.util.Objects;
+
 public class gradesStudent extends AppCompatActivity implements View.OnClickListener {
 
     private FirebaseUser fUser;
     private FirebaseDatabase database;
     private FirebaseAuth sAuth;
-    private DatabaseReference ClassRoom;
+    private DatabaseReference Lessons;
     String currID;
+    ListView listView;
 
-    private TextView course1, course2, course3, course4, course5;
-    //private List<String> courses = new ArrayList<String>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,38 +43,35 @@ public class gradesStudent extends AppCompatActivity implements View.OnClickList
 
         fUser = getIntent().getParcelableExtra("fuser");
         currID = getIntent().getStringExtra("Uid");
-        ClassRoom = database.getReference("ClassRoom");
-        course1 = findViewById(R.id.fill1);
-        course2 = findViewById(R.id.fill2);
-        course3 = findViewById(R.id.fill3);
-        course4 = findViewById(R.id.fill4);
-        course5 = findViewById(R.id.fill5);
-
-
+        Lessons = database.getReference("Lessons");
 
         Toast.makeText(gradesStudent.this, "getUid: " + sAuth.getUid(), Toast.LENGTH_LONG).show();
-        ClassRoom.child(sAuth.getUid()).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<DataSnapshot> task) {
-                if(task.isSuccessful())
-                {
-                    Student temp = task.getResult().getValue(Student.class);
-                    course1.setText(temp.getCourses_with_grade().get("Bible").toString());
-                    course2.setText(temp.getCourses_with_grade().get("Computers").toString());
-                    course3.setText(temp.getCourses_with_grade().get("English").toString());
-                    course4.setText(temp.getCourses_with_grade().get("Hebrew").toString());
-                    course5.setText(temp.getCourses_with_grade().get("Math").toString());
 
+        ArrayList<String> LessonList=new ArrayList<>();
+        ArrayList<String> GradeList=new ArrayList<>();
+        ArrayAdapter arrayAdapter=new ArrayAdapter<>(this, android.R.layout.simple_list_item_1,LessonList);
+
+        Lessons.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for(DataSnapshot ds: snapshot.getChildren()){
+                    if(ds.child("students_CourseGrade").hasChild(Objects.requireNonNull(sAuth.getUid()))){
+                        Lesson lesson = new Lesson();
+                        //LessonList.add(lesson);
+                    }
                 }
             }
 
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
 
+            }
         });
-
     }
 
     @Override
-    public void onClick(View v) {
+        public void onClick (View v){
 
-    }
+        }
+
 }

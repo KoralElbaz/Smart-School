@@ -15,6 +15,7 @@ public class Lesson implements Serializable
         this.teacher_LessonName = teacher_LessonName;
     }
 
+    public Lesson(){}
     public Lesson(String details, Map<String, String> students_CourseGrade, Map<String,String> teacher_LessonName) {
         this.details = details;
         this.students_CourseGrade = students_CourseGrade;

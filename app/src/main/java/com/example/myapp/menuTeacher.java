@@ -11,7 +11,7 @@ import android.widget.Toast;
 
 public class menuTeacher extends AppCompatActivity implements View.OnClickListener{
 
-    private LinearLayout Grades ,  Presence , Profile;
+    private LinearLayout Grades ,  Presence , Profile, TestDate, StudentsList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,6 +26,12 @@ public class menuTeacher extends AppCompatActivity implements View.OnClickListen
 
         Profile= findViewById(R.id.Profile);
         Profile.setOnClickListener(this);
+
+        TestDate = findViewById(R.id.TestDate);
+        TestDate.setOnClickListener(this);
+
+        StudentsList = findViewById(R.id.StudentsList);
+        StudentsList.setOnClickListener(this);
     }
 
     @Override
@@ -41,6 +47,13 @@ public class menuTeacher extends AppCompatActivity implements View.OnClickListen
             case R.id.Profile:
                 startActivity(new Intent(this, profileTeacher.class));
                 break;
+            case R.id.TestDate:
+                startActivity(new Intent(this, TestDate.class));
+                break;
+            case R.id.StudentsList:
+                startActivity(new Intent(this, studentList.class));
+                break;
+
         }
     }
 }
