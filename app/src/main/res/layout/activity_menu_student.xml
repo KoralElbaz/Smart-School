@@ -9,33 +9,59 @@
     tools:context=".menuStudent">
 
 
+    <TextView
+        android:id="@+id/Menu"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:text="Student Menu"
+        android:textColor="@color/white"
+        android:textSize="50sp"
+        android:textStyle="bold"
+        android:layout_marginTop="70dp"
+        android:layout_marginLeft="70dp"
+        android:layout_marginRight="10dp"
+        />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/Profile"
+        android:layout_below="@+id/Menu"
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="100dp"
+        android:padding="10dp">
+
+        <ImageView
+            android:id="@+id/imageprofile"
+            android:layout_width="90dp"
+            android:layout_height="85dp"
+            android:src="@drawable/profile" />
+
         <TextView
-            android:id="@+id/Menu"
+            android:id="@+id/Clickprofile"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:text="Student Menu"
-            android:textColor="@color/white"
-            android:textSize="50sp"
-            android:textStyle="bold"
-            android:layout_marginTop="70dp"
-            android:layout_marginLeft="70dp"
-            android:layout_marginRight="10dp"
-            />
+            android:text="Profile"
+            android:textSize="30dp"
+            android:layout_marginVertical="20dp"
+            android:textStyle="bold" />
+
+    </LinearLayout>
 
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/Grades"
-        android:layout_below="@+id/Menu"
+        android:layout_below="@+id/Profile"
         android:layout_marginLeft="5dp"
-        android:layout_marginTop="100dp"
-        android:padding="20dp">
+        android:layout_marginTop="1dp"
+        android:padding="10dp">
 
         <ImageView
             android:id="@+id/imageGrades"
-            android:layout_width="100dp"
-            android:layout_height="95dp"
+            android:layout_width="90dp"
+            android:layout_height="85dp"
             android:src="@drawable/icon11" />
 
         <TextView
@@ -50,51 +76,52 @@
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/Presence"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/Presence"
         android:layout_below="@+id/Grades"
         android:layout_marginLeft="5dp"
-        android:layout_marginTop="8dp"
-        android:padding="20dp">
+        android:layout_marginTop="1dp"
+        android:padding="10dp">
 
         <ImageView
             android:id="@+id/imagepresence"
-            android:layout_width="100dp"
-            android:layout_height="95dp"
+            android:layout_width="90dp"
+            android:layout_height="85dp"
             android:src="@drawable/presen" />
 
         <TextView
             android:id="@+id/ClickPresence"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginVertical="20dp"
             android:text="Absences"
             android:textSize="30dp"
-            android:layout_marginVertical="20dp"
             android:textStyle="bold" />
 
     </LinearLayout>
 
+
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/Profile"
+        android:id="@+id/Lessons"
         android:layout_below="@+id/Presence"
         android:layout_marginLeft="5dp"
-        android:layout_marginTop="8dp"
-        android:padding="20dp">
+        android:layout_marginTop="1dp"
+        android:padding="10dp">
 
         <ImageView
-            android:id="@+id/imageprofile"
-            android:layout_width="100dp"
-            android:layout_height="95dp"
-            android:src="@drawable/profile" />
+            android:id="@+id/imageLessons"
+            android:layout_width="90dp"
+            android:layout_height="85dp"
+            android:src="@drawable/lessons" />
 
         <TextView
-            android:id="@+id/Clickprofile"
+            android:id="@+id/Clicklessons"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Profile"
+            android:text="My Lessons"
             android:textSize="30dp"
             android:layout_marginVertical="20dp"
             android:textStyle="bold" />

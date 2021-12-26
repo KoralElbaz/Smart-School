@@ -46,6 +46,11 @@
         <entry key="..\:/Users/Koral Elbaz/MyApp/app/src/main/res/layout/activity_welcome_student.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/Koral Elbaz/MyApp/app/src/main/res/layout/activity_welcome_teacher.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/Koral Elbaz/MyApp/app/src/main/res/layout/content_scrolling.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/sivan/AndroidStudioProjects/Smart-school/app/src/main/res/layout/activity_grades_student.xml" value="0.353125" />
+        <entry key="..\:/Users/sivan/AndroidStudioProjects/Smart-school/app/src/main/res/layout/activity_menu_student.xml" value="0.3671875" />
+        <entry key="..\:/Users/sivan/AndroidStudioProjects/Smart-school/app/src/main/res/layout/activity_menu_teacher.xml" value="0.3671875" />
+        <entry key="..\:/Users/sivan/AndroidStudioProjects/Smart-school/app/src/main/res/layout/activity_profile_student.xml" value="0.353125" />
+        <entry key="..\:/Users/sivan/AndroidStudioProjects/Smart-school/app/src/main/res/layout/activity_profile_teacher.xml" value="0.353125" />
       </map>
     </option>
   </component>

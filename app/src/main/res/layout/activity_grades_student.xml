@@ -15,7 +15,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
-            android:text="Grades Student"
+            android:text="Courses Grades"
             android:textColor="@color/white"
             android:textSize="40dp"
             android:textStyle="bold"
@@ -25,37 +25,14 @@
             />
 
 
-
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/row1"
-            android:layout_below="@+id/gradesTitle"
-            android:text="Courses"
-            android:textSize="30dp"
-            android:textStyle="bold"
-            android:layout_marginTop="120dp"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/row11"
-            android:layout_below="@+id/gradesTitle"
-            android:text="Grades"
-            android:textSize="30dp"
-            android:textStyle="bold"
-            android:layout_marginTop="120dp"
-            android:layout_marginLeft="190dp"/>
-
         <!--שורה 1-->
         <TextView
             android:id="@+id/bible"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/row1"
-            android:layout_marginLeft="5dp"
-            android:layout_marginTop="50dp"
+            android:layout_below="@+id/gradesTitle"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="150dp"
             android:text="Bible:"
             android:textSize="30dp"
             android:textStyle="bold"
@@ -67,9 +44,9 @@
             android:id="@+id/fill1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/row1"
+            android:layout_below="@+id/gradesTitle"
             android:layout_marginLeft="190dp"
-            android:layout_marginTop="50dp"
+            android:layout_marginTop="150dp"
             android:text=""
             android:textSize="30dp" />
 
@@ -81,7 +58,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/bible"
-            android:layout_marginLeft="5dp"
+            android:layout_marginLeft="10dp"
             android:layout_marginTop="20dp"
             android:text="Computer:"
             android:textSize="30dp"
@@ -108,7 +85,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/computer"
-            android:layout_marginLeft="5dp"
+            android:layout_marginLeft="10dp"
             android:layout_marginTop="20dp"
             android:text="English:"
             android:textSize="30dp"
@@ -134,7 +111,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/english"
-            android:layout_marginLeft="5dp"
+            android:layout_marginLeft="10dp"
             android:layout_marginTop="20dp"
             android:text="Hebrew:"
             android:textSize="30dp"
@@ -158,7 +135,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/hebrew"
-            android:layout_marginLeft="5dp"
+            android:layout_marginLeft="10dp"
             android:layout_marginTop="20dp"
             android:text="Math:"
             android:textSize="30dp"
