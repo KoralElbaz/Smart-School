@@ -1,6 +1,6 @@
-## Smart-school
+# Smart-school
 
-# this app will act as a bridge between the teacher to the student.
+## this app will act as a bridge between the teacher to the student.
 
 the teacher will update the grades and presence, which will be avaiable to view from the student's profile.
 Teacher's side:
