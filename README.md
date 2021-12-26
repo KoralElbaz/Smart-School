@@ -3,6 +3,7 @@
 ## this app will act as a bridge between the teacher to the student.
 
 the teacher will update the grades and presence, which will be avaiable to view from the student's profile.
+
 Teacher's side:
     Updating grades and presence of each student.
 
