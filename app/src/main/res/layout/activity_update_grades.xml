@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/screen2"
+    tools:context=".updateGrades">
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="25dp"
+        android:layout_marginTop="80dp"
+        android:layout_marginEnd="25dp"
+        android:layout_marginBottom="25dp"
+        android:gravity="center"
+        android:text="Up Date Grades"
+        android:textColor="@color/white"
+        android:textSize="42dp"
+        android:textStyle="bold"
+        />
+
+    <TextView
+        android:id="@+id/full_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/title"
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="75dp"
+        android:text="Full Name:"
+        android:textSize="25dp"
+        android:textStyle="bold" />
+
+
+
+    <TextView
+        android:id="@+id/fill1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/title"
+        android:layout_marginLeft="200dp"
+        android:layout_marginTop="85dp"
+        android:text=""
+        android:textSize="20dp" />
+
+
+    <!--שורה 2-->
+
+    <TextView
+        android:id="@+id/ID"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/full_name"
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="10dp"
+        android:text="ID:"
+        android:textSize="25dp"
+        android:textStyle="bold"
+        />
+
+    <TextView
+        android:id="@+id/fill2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/fill1"
+        android:layout_marginLeft="200dp"
+        android:layout_marginTop="15dp"
+        android:text=""
+        android:textSize="20dp"
+        />
+
+
+    <!--שורה 3-->
+
+
+    <TextView
+        android:id="@+id/email"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/ID"
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="10dp"
+        android:text="Email:"
+        android:textSize="25dp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/fill3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/fill2"
+        android:layout_marginLeft="200dp"
+        android:layout_marginTop="15dp"
+        android:text=""
+        android:textSize="18dp"
+        />
+
+
+
+
+
+
+
+    <TextView
+        android:id="@+id/bible"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/email"
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="20dp"
+        android:text="Bible:"
+        android:textSize="25dp"
+        android:textStyle="bold" />
+
+
+    <EditText
+        android:id="@+id/fill4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/email"
+        android:layout_marginLeft="190dp"
+        android:layout_marginTop="5dp"
+        android:background="#30ffffff"
+        android:drawablePadding="20dp"
+        android:hint="Enter grade"
+        android:padding="12dp"
+        android:textSize="20dp" />
+
+
+        <!--שורה 2-->
+
+    <TextView
+        android:id="@+id/computer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/bible"
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="10dp"
+        android:text="Computer:"
+        android:textSize="25dp"
+        android:textStyle="bold" />
+
+    <EditText
+        android:id="@+id/fill5"
+        style="@style/grade_text"
+        android:hint="Enter grade" />
+
+
+        <!--שורה 3-->
+
+
+    <TextView
+        android:id="@+id/english"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/computer"
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="18dp"
+        android:text="English:"
+        android:textSize="25dp"
+        android:textStyle="bold" />
+
+    <EditText
+        android:id="@+id/fill6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/fill5"
+        android:layout_marginLeft="190dp"
+        android:background="#30ffffff"
+        android:drawablePadding="20dp"
+        android:padding="12dp"
+        android:hint="Enter grade"
+        android:textSize="20dp" />
+
+        <!--שורה 4-->
+
+
+    <TextView
+        android:id="@+id/hebrew"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/english"
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="17dp"
+        android:text="Hebrew:"
+        android:textSize="25dp"
+        android:textStyle="bold" />
+
+    <EditText
+        android:id="@+id/fill7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/fill6"
+        android:layout_marginLeft="190dp"
+        android:background="#30ffffff"
+        android:drawablePadding="20dp"
+        android:hint="Enter grade"
+        android:padding="12dp"
+        android:textSize="20dp" />
+
+        <!-- שורה 5 -->
+        <TextView
+            android:id="@+id/math"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/hebrew"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="17dp"
+            android:text="Math:"
+            android:textSize="25dp"
+            android:textStyle="bold"
+            />
+
+    <EditText
+        android:id="@+id/fill8"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/fill7"
+        android:layout_marginLeft="190dp"
+        android:background="#30ffffff"
+        android:padding="12dp"
+        android:drawablePadding="20dp"
+        android:hint="Enter grade"
+        android:textSize="20dp" />
+
+    <Button
+        android:id="@+id/updateBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/fill8"
+        android:layout_centerHorizontal="true"
+        android:backgroundTint="#a0a0a0"
+        android:text="Update"
+
+        />
+
+
+
+</RelativeLayout>

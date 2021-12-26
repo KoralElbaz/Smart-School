@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.example.myapp">
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.MyApp"
+        android:usesCleartextTraffic="true">
+        <activity
+            android:name=".studentList2"
+            android:exported="false" />
+        <activity
+            android:name=".PlacementStudent4"
+            android:exported="false" />
+        <activity
+            android:name=".PlacementStudent3"
+            android:exported="false" />
+        <activity
+            android:name=".PlacementStudent2"
+            android:exported="false" />
+        <activity
+            android:name=".PlacementStudent"
+            android:exported="false" />
+        <activity
+            android:name=".studentList"
+            android:exported="false" />
+        <activity
+            android:name=".TeacherRegistration"
+            android:exported="false" />
+        <activity
+            android:name=".StudentRegistration"
+            android:exported="false" />
+        <activity
+            android:name=".menuSecretary"
+            android:exported="false" />
+        <activity
+            android:name=".updatePresence"
+            android:exported="false" />
+        <activity
+            android:name=".updateGrades"
+            android:exported="false" />
+        <activity
+            android:name=".presenceTeacher"
+            android:exported="false" />
+        <activity
+            android:name=".profileTeacher"
+            android:exported="false" />
+        <activity
+            android:name=".gradesTeacher"
+            android:exported="false" />
+        <activity
+            android:name=".presenceStudent"
+            android:exported="false" />
+        <activity
+            android:name=".profileStudent"
+            android:exported="false" />
+        <activity
+            android:name=".signIn"
+            android:exported="true" />
+        <activity
+            android:name=".menuStudent"
+            android:exported="true" />
+        <activity
+            android:name=".menuTeacher"
+            android:exported="true" />
+        <activity
+            android:name=".gradesStudent"
+            android:exported="true" />
+    </application>
+
+</manifest>

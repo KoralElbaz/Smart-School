@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/screen2"
+    tools:context=".presenceStudent">
+
+
+
+    <TextView
+        android:id="@+id/gradesTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:text="Absences Student"
+        android:textColor="@color/white"
+        android:textSize="40dp"
+        android:textStyle="bold"
+        android:layout_marginTop="70dp"
+        android:layout_marginLeft="70dp"
+        android:layout_marginRight="10dp"
+        />
+
+
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/row1"
+        android:layout_below="@+id/gradesTitle"
+        android:text="Courses"
+        android:textSize="30dp"
+        android:textStyle="bold"
+        android:layout_marginTop="120dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/presence"
+        android:layout_below="@+id/gradesTitle"
+        android:text="presence"
+        android:textSize="30dp"
+        android:textStyle="bold"
+        android:layout_marginTop="120dp"
+        android:layout_marginLeft="190dp"/>
+
+    <!--שורה 1-->
+    <TextView
+        android:id="@+id/bible"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/row1"
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="50dp"
+        android:text="Bible:"
+        android:textSize="30dp"
+        android:textStyle="bold"
+        />
+
+
+
+    <TextView
+        android:id="@+id/fill1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/row1"
+        android:layout_marginLeft="190dp"
+        android:layout_marginTop="50dp"
+        android:text=""
+        android:textSize="30dp" />
+
+
+    <!--שורה 2-->
+
+    <TextView
+        android:id="@+id/computer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/bible"
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="20dp"
+        android:text="Computer:"
+        android:textSize="30dp"
+        android:textStyle="bold"
+        />
+
+    <TextView
+        android:id="@+id/fill2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/fill1"
+        android:layout_marginLeft="190dp"
+        android:layout_marginTop="20dp"
+        android:text=""
+        android:textSize="30dp"
+        />
+
+
+    <!--שורה 3-->
+
+
+    <TextView
+        android:id="@+id/english"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/computer"
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="20dp"
+        android:text="English:"
+        android:textSize="30dp"
+        android:textStyle="bold"
+        />
+
+    <TextView
+        android:id="@+id/fill3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/fill2"
+        android:layout_marginLeft="190dp"
+        android:layout_marginTop="20dp"
+        android:text=""
+        android:textSize="30dp"
+        />
+
+    <!--שורה 4-->
+
+
+    <TextView
+        android:id="@+id/hebrew"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/english"
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="20dp"
+        android:text="Hebrew:"
+        android:textSize="30dp"
+        android:textStyle="bold"
+        />
+
+    <TextView
+        android:id="@+id/fill4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/fill3"
+        android:layout_marginLeft="190dp"
+        android:layout_marginTop="20dp"
+        android:text=""
+        android:textSize="30dp"
+        />
+
+    <!-- שורה 5 -->
+    <TextView
+        android:id="@+id/math"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/hebrew"
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="20dp"
+        android:text="Math:"
+        android:textSize="30dp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/fill5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/fill4"
+        android:layout_marginLeft="190dp"
+        android:layout_marginTop="20dp"
+        android:text=""
+        android:textSize="30dp"
+        />
+
+</RelativeLayout>
