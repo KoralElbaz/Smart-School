@@ -5,9 +5,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/screen2"
-    tools:context=".TeacherStudentsList">
+    tools:context=".TeacherStudentsListLevelTwo">
 
-    <TextView
+
+<TextView
         android:id="@+id/title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -16,19 +17,33 @@
         android:layout_marginEnd="25dp"
         android:layout_marginBottom="25dp"
         android:gravity="center"
-        android:text="Class List"
+        android:text="List of classmates"
         android:textColor="@color/white"
-        android:textSize="50dp"
+        android:textSize="42dp"
         android:textStyle="bold" />
 
 
+
     <ListView
-        android:id="@+id/studentslistview"
+        android:id="@+id/students_names_list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@+id/title"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="70dp"
+        android:layout_marginTop="90dp"
         android:layout_marginEnd="20dp"
         android:layout_marginBottom="20dp" />
+
+    <Button
+        android:id="@+id/backBtn"
+        android:layout_width="210dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/title"
+        android:layout_centerHorizontal="true"
+        android:backgroundTint="#a0a0a0"
+        android:layout_marginTop="370dp"
+        android:text="back to menu"
+
+        />
+
 </RelativeLayout>

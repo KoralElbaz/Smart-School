@@ -11,6 +11,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MyApp"
         android:usesCleartextTraffic="true">
+
+        <activity
+            android:name=".TeacherStudentsListLevelTwo"
+            android:exported="false" />
         <activity
             android:name=".TeacherStudentsList"
             android:exported="false" />

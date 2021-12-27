@@ -33,11 +33,11 @@ public class studentList2 extends AppCompatActivity {
         ClassRoom = database.getReference("ClassRoom");
         student=new Student();
 
-        ArrayList<String> emailList=new ArrayList<>();
+        ArrayList<String> names=new ArrayList<>();
         ArrayList<String> uidList=new ArrayList<>();
 
 
-        ArrayAdapter arrayAdapter=new ArrayAdapter<>(this, android.R.layout.simple_list_item_1,emailList);
+        ArrayAdapter arrayAdapter=new ArrayAdapter<>(this, android.R.layout.simple_list_item_1,names);
 
         Intent intent = this.getIntent();
 
@@ -49,7 +49,7 @@ public class studentList2 extends AppCompatActivity {
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
                     for (DataSnapshot ds : snapshot.getChildren()) {
                         student = ds.getValue(Student.class);
-                        emailList.add(student.getEmail());
+                        names.add(student.getFull_name());
                         uidList.add(student.getFbUID());
 
 
