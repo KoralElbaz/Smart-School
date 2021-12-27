@@ -4,6 +4,8 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.widget.ListView;
+import android.widget.SimpleAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -11,15 +13,24 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
 
 public class presenceStudent extends AppCompatActivity {
 
 
     private FirebaseDatabase database;
     private FirebaseAuth sAuth;
-    private DatabaseReference ClassRoom;
+    private DatabaseReference Lessons;
+    ListView listView;
 
 
     private TextView course1, course2, course3, course4, course5;
@@ -31,27 +42,44 @@ public class presenceStudent extends AppCompatActivity {
 
         database = FirebaseDatabase.getInstance();
         sAuth = FirebaseAuth.getInstance();
-        ClassRoom = database.getReference("ClassRoom");
-        course1 = findViewById(R.id.fill1);
-        course2 = findViewById(R.id.fill2);
-        course3 = findViewById(R.id.fill3);
-        course4 = findViewById(R.id.fill4);
-        course5 = findViewById(R.id.fill5);
 
+        Lessons = database.getReference("Lessons");
+        listView = (ListView) findViewById(R.id.gradeslistview);
 
         Toast.makeText(presenceStudent.this, "getUid: " + sAuth.getUid(), Toast.LENGTH_LONG).show();
-        ClassRoom.child(sAuth.getUid()).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+
+
+        List<Map<String, String>> listArray = new ArrayList<>();
+
+
+        Lessons.addValueEventListener(new ValueEventListener() {
             @Override
-            public void onComplete(@NonNull Task<DataSnapshot> task) {
-                if(task.isSuccessful())
-                {
-                    Student temp = task.getResult().getValue(Student.class);
-                    course1.setText(temp.getPresence().get("Bible").toString());
-                    course2.setText(temp.getPresence().get("Computers").toString());
-                    course3.setText(temp.getPresence().get("English").toString());
-                    course4.setText(temp.getPresence().get("Hebrew").toString());
-                    course5.setText(temp.getPresence().get("Math").toString());
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for(DataSnapshot ds: snapshot.getChildren()){
+                    if(ds.child("students_CourseGrade").hasChild(Objects.requireNonNull(sAuth.getUid())))
+                    {
+                        String lesson_name=ds.getKey();
+                        String grade=Objects.requireNonNull(ds.child("students_CourseGrade").
+                                child(Objects.requireNonNull(sAuth.getUid())).child("Absence").getValue().toString());
+
+
+                        Map<String, String> listItem = new HashMap<>();
+                        listItem.put("titleKey", lesson_name);
+                        listItem.put("detailKey", grade);
+                        listArray.add(listItem);
+
+                    }
                 }
+                SimpleAdapter simpleAdapter = new SimpleAdapter(presenceStudent.this, listArray,
+                        android.R.layout.simple_list_item_2,
+                        new String[] {"titleKey", "detailKey" },
+                        new int[] {android.R.id.text1, android.R.id.text2 });
+                listView.setAdapter(simpleAdapter);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
             }
         });
 

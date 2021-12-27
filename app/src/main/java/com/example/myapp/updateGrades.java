@@ -95,7 +95,14 @@ public class updateGrades extends AppCompatActivity implements View.OnClickListe
         {
             case R.id.updateBtn: //update student grade
                 String given_grade = grade.getText().toString();
-                Lessons.child(lesson_name).child("students_CourseGrade").child(uid).setValue(given_grade);
+                if(Integer.parseInt(given_grade)<0)
+                {
+
+                    Toast.makeText(updateGrades.this, "Can not be negative! " , Toast.LENGTH_SHORT).show();
+                    Toast.makeText(updateGrades.this, "upgrade UnSuccessfully " , Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                Lessons.child(lesson_name).child("students_CourseGrade").child(uid).child("Grade").setValue(given_grade);
                 Toast.makeText(updateGrades.this, "upgrade grade Successfully " , Toast.LENGTH_SHORT).show();
                 break;
 

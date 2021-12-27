@@ -30,11 +30,9 @@ import java.util.Objects;
 
 public class gradesStudent extends AppCompatActivity {
 
-    private FirebaseUser fUser;
     private FirebaseDatabase database;
     private FirebaseAuth sAuth;
     private DatabaseReference Lessons;
-    String currID;
     ListView listView;
 
 
@@ -55,8 +53,6 @@ public class gradesStudent extends AppCompatActivity {
         List<Map<String, String>> listArray = new ArrayList<>();
 
 
-        // ArrayAdapter arrayAdapter=new ArrayAdapter<>(this, android.R.layout.simple_list_item_1,LessonList);
-
         Lessons.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -65,7 +61,7 @@ public class gradesStudent extends AppCompatActivity {
                     {
                         String lesson_name=ds.getKey();
                         String grade=Objects.requireNonNull(ds.child("students_CourseGrade").
-                                child(Objects.requireNonNull(sAuth.getUid())).getValue()).toString();
+                                child(Objects.requireNonNull(sAuth.getUid())).child("Grade").getValue().toString());
 
 
                         Map<String, String> listItem = new HashMap<>();

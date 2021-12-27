@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/screen2"
-    tools:context=".presenceTeacher">
+    tools:context=".updatePresence_levelTwo"
+    android:background="@drawable/screen2">
 
 
     <TextView
@@ -20,8 +20,7 @@
         android:text="Absences"
         android:textColor="@color/white"
         android:textSize="42dp"
-        android:textStyle="bold"
-        />
+        android:textStyle="bold" />
 
 
     <TextView
@@ -29,7 +28,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/row1"
         android:layout_below="@+id/title"
-        android:text="Select a ClassRoom:"
+        android:text="Select a student:"
         android:textSize="30dp"
         android:textStyle="bold"
         android:layout_marginTop="90dp"
@@ -38,7 +37,7 @@
 
 
     <ListView
-        android:id="@+id/listview"
+        android:id="@+id/students_grade_list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@+id/row1"

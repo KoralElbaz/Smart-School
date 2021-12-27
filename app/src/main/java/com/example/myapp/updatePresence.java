@@ -8,27 +8,36 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.SimpleAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.HashMap;
+import java.util.Map;
+import java.util.Objects;
 
-public class updatePresence extends AppCompatActivity {
+public class updatePresence extends AppCompatActivity implements View.OnClickListener{
+
 
     private FirebaseDatabase database;
     private DatabaseReference ClassRoom;
+    private DatabaseReference Lessons;
+    private FirebaseAuth sAuth;
 
-    private Button updateBtn;
-    private Button plus , minus;
-    private TextView fullName, id, email ;
-    private EditText course1, course2, course3, course4, course5;
+
+    private Button updateBtn, backbtn , minus , plus;
+    private TextView fullName, id ,absences;
+    String lesson_name, uid , abs ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,98 +47,119 @@ public class updatePresence extends AppCompatActivity {
 
         database = FirebaseDatabase.getInstance();
         ClassRoom = database.getReference("ClassRoom");
+        Lessons = database.getReference("Lessons");
+        sAuth = FirebaseAuth.getInstance();
 
         updateBtn=findViewById(R.id.updateBtn);
-        /*plus=findViewById(R.id.plus);
-        minus=findViewById(R.id.minus);*/
+        updateBtn.setOnClickListener(this);
 
+        backbtn = findViewById(R.id.backBtn);
+        backbtn.setOnClickListener(this);
 
-        fullName = findViewById(R.id.fill1);
-        id = findViewById(R.id.fill2);
-        email = findViewById(R.id.fill3);
-        course1 = findViewById(R.id.fill4);
-        course2 = findViewById(R.id.fill5);
-        course3 = findViewById(R.id.fill6);
-        course4 = findViewById(R.id.fill7);
-        course5 = findViewById(R.id.fill8);
+        minus = findViewById(R.id.minus);
+        minus.setOnClickListener(this);
+
+        plus = findViewById(R.id.plus);
+        plus.setOnClickListener(this);
+
+        fullName = findViewById(R.id.fillName);
+        id = findViewById(R.id.fillID);
+        absences = findViewById(R.id.to_fill);
+
 
         Intent intent = this.getIntent();
 
         if(intent!=null)
         {
-            String email2 = intent.getStringExtra("email");
+
+
             String full_name = intent.getStringExtra("full_name");
-            String id2 = intent.getStringExtra("id");
-            String uid = intent.getStringExtra("uid");
+            String classGrade = intent.getStringExtra("classGrade");
+            uid = intent.getStringExtra("uid");
+            lesson_name = intent.getStringExtra("lessonName");
 
             fullName.setText(full_name);
-            id.setText(id2);
-            email.setText(email2);
 
 
-//            plus.setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View v)
-//                {
-//                    ClassRoom.child(uid).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
-//                        @Override
-//                        public void onComplete(@NonNull Task<DataSnapshot> task) {
-//                            if(task.isSuccessful())
-//                            {
-//                                Student temp = task.getResult().getValue(Student.class);
-//                               temp.getPresence().get(0);//bible
-//                                temp.getPresence().get(1);
-//                                temp.getPresence().get(2);
-//                                temp.getPresence().get(3);
-//                                temp.getPresence().get(4);
-//
-//                            }
-//                        }
-//                    });
-//
-//                }
-//            });
-//
-//            minus.setOnClickListener(new View.OnClickListener()
-//            {
-//                @Override
-//                public void onClick(View v) {
-//
-//                }
-//            });
 
-
-            updateBtn.setOnClickListener(new View.OnClickListener() {
+            Lessons.addValueEventListener(new ValueEventListener() {
                 @Override
-                public void onClick(View v) {
-                    String input1=course1.getText().toString();
-                    String input2=course2.getText().toString();
-                    String input3=course3.getText().toString();
-                    String input4=course4.getText().toString();
-                    String input5=course5.getText().toString();
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    for(DataSnapshot ds: snapshot.getChildren()){
+                        if(ds.child("students_CourseGrade").hasChild(Objects.requireNonNull(uid)))
+                        {
+                            abs=Objects.requireNonNull(ds.child("students_CourseGrade").
+                                    child(Objects.requireNonNull(uid)).child("Absence").getValue().toString());
+                            absences.setText(abs);
 
-//                     ClassRoom.child(uid).child("courses_with_grade").child("Bible").setValue(input1);
 
-                    HashMap hashMap=new HashMap();
-                    if( !input1.equals("")){ hashMap.put("Bible",input1);}
-                    if(!input2.equals("")){ hashMap.put("Computers",input2);}
-                    if(!input3.equals("")){hashMap.put("English",input3); }
-                    if(!input4.equals("")){hashMap.put("Hebrew",input4);}
-                    if(!input5.equals("")){hashMap.put("Math",input5);}
-
-                    ClassRoom.child(uid).child("presence").updateChildren(hashMap).addOnSuccessListener(new OnSuccessListener() {
-                        @Override
-                        public void onSuccess(Object o) {
-                            ClassRoom.child(uid).child("update_presence").setValue(true);
-                            Toast.makeText(updatePresence.this, "Update Successfully", Toast.LENGTH_LONG).show();
                         }
-                    });
+                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+
+                }
+            });
+
+
+
+
+
+            ClassRoom.child(classGrade).addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    for(DataSnapshot ds: snapshot.getChildren()){
+                        if(ds.getKey().equals(uid)){
+                            id.setText(ds.child("id").getValue().toString());
+                        }
+                    }
+
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
 
                 }
             });
 
         }
 
+    }
 
+
+    @Override
+    public void onClick(View v) {
+        int new_abs= Integer.parseInt(abs);
+        String finalABS="";
+        switch (v.getId())
+        {
+            case R.id.plus:
+                new_abs = Integer.parseInt(abs) +1;
+                finalABS = new_abs+"";
+                Lessons.child(lesson_name).child("students_CourseGrade").child(uid).child("Absence").setValue(finalABS);
+                break;
+
+            case R.id.minus:
+                new_abs = Integer.parseInt(abs) -1;
+                if(new_abs<0)
+                {
+                    Toast.makeText(updatePresence.this, "Can not be negative! " , Toast.LENGTH_SHORT).show();
+                    Toast.makeText(updatePresence.this, "upgrade UnSuccessfully " , Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                finalABS = new_abs+"";
+                Lessons.child(lesson_name).child("students_CourseGrade").child(uid).child("Absence").setValue(finalABS);
+                break;
+            case R.id.updateBtn: //update student grade
+                Toast.makeText(updatePresence.this, "upgrade Successfully " , Toast.LENGTH_SHORT).show();
+                break;
+
+            case R.id.backBtn:
+                Intent i = new Intent(getApplicationContext(),menuTeacher.class);
+                startActivity(i);
+                break;
+        }
     }
 }

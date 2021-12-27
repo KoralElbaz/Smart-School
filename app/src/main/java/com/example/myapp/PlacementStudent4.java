@@ -94,20 +94,28 @@ public class PlacementStudent4 extends AppCompatActivity{
                 {
 
                     HashMap hashMap=new HashMap();
-                    hashMap.put(uidStudent,"");
-                    Lessons.child(Lesson_name).child("students_CourseGrade").updateChildren(hashMap).addOnSuccessListener(new OnSuccessListener() {
+                    hashMap.put("Grade","No score");
+                    Lessons.child(Lesson_name).child("students_CourseGrade").child(uidStudent).updateChildren(hashMap).addOnSuccessListener(new OnSuccessListener() {
                         @Override
                         public void onSuccess(Object o) {
                             HashMap hashMap2=new HashMap();
-                            hashMap2.put(uidList.get(position),Lesson_name);
-                            Lessons.child(Lesson_name).child("teacher_LessonName").updateChildren(hashMap2).addOnSuccessListener(new OnSuccessListener() {
+                            hashMap2.put("Absence","0");
+                            Lessons.child(Lesson_name).child("students_CourseGrade").child(uidStudent).updateChildren(hashMap2).addOnSuccessListener(new OnSuccessListener() {
                                 @Override
                                 public void onSuccess(Object o) {
-                                    Toast.makeText(PlacementStudent4.this, "The Placement Successfully", Toast.LENGTH_LONG).show();
-                                    Intent i = new Intent(getApplicationContext(),menuSecretary.class);
-                                    startActivity(i);
+                                    HashMap hashMap3=new HashMap();
+                                    hashMap3.put(uidList.get(position),Lesson_name);
+                                    Lessons.child(Lesson_name).child("teacher_LessonName").updateChildren(hashMap3).addOnSuccessListener(new OnSuccessListener() {
+                                        @Override
+                                        public void onSuccess(Object o) {
+                                            Toast.makeText(PlacementStudent4.this, "The Placement Successfully", Toast.LENGTH_LONG).show();
+                                            Intent i = new Intent(getApplicationContext(),menuSecretary.class);
+                                            startActivity(i);
+                                        }
+                                    });
                                 }
                             });
+
                         }
                     });
                 }
