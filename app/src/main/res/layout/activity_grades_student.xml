@@ -17,21 +17,21 @@
             android:layout_centerHorizontal="true"
             android:text="Courses Grades"
             android:textColor="@color/white"
-            android:textSize="40dp"
+            android:textSize="45dp"
             android:textStyle="bold"
-            android:layout_marginTop="70dp"
+            android:layout_marginTop="100dp"
             android:layout_marginLeft="70dp"
             android:layout_marginRight="10dp"
             />
 
 
         <ListView
-            android:id="@+id/listview"
+            android:id="@+id/gradeslistview"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_below="@+id/gradesTitle"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="120dp"
+            android:layout_marginTop="100dp"
             android:layout_marginEnd="20dp"
             android:layout_marginBottom="20dp" />
 

@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.SimpleAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -21,9 +22,13 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 
-public class gradesStudent extends AppCompatActivity implements View.OnClickListener {
+public class gradesStudent extends AppCompatActivity {
 
     private FirebaseUser fUser;
     private FirebaseDatabase database;
@@ -41,25 +46,40 @@ public class gradesStudent extends AppCompatActivity implements View.OnClickList
         database = FirebaseDatabase.getInstance();
         sAuth = FirebaseAuth.getInstance();
 
-        fUser = getIntent().getParcelableExtra("fuser");
-        currID = getIntent().getStringExtra("Uid");
         Lessons = database.getReference("Lessons");
+        listView = (ListView) findViewById(R.id.gradeslistview);
 
         Toast.makeText(gradesStudent.this, "getUid: " + sAuth.getUid(), Toast.LENGTH_LONG).show();
 
-        ArrayList<String> LessonList=new ArrayList<>();
-        ArrayList<String> GradeList=new ArrayList<>();
-        ArrayAdapter arrayAdapter=new ArrayAdapter<>(this, android.R.layout.simple_list_item_1,LessonList);
+
+        List<Map<String, String>> listArray = new ArrayList<>();
+
+
+        // ArrayAdapter arrayAdapter=new ArrayAdapter<>(this, android.R.layout.simple_list_item_1,LessonList);
 
         Lessons.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for(DataSnapshot ds: snapshot.getChildren()){
-                    if(ds.child("students_CourseGrade").hasChild(Objects.requireNonNull(sAuth.getUid()))){
-                        Lesson lesson = new Lesson();
-                        //LessonList.add(lesson);
+                    if(ds.child("students_CourseGrade").hasChild(Objects.requireNonNull(sAuth.getUid())))
+                    {
+                        String lesson_name=ds.getKey();
+                        String grade=Objects.requireNonNull(ds.child("students_CourseGrade").
+                                child(Objects.requireNonNull(sAuth.getUid())).getValue()).toString();
+
+
+                        Map<String, String> listItem = new HashMap<>();
+                        listItem.put("titleKey", lesson_name);
+                        listItem.put("detailKey", grade);
+                        listArray.add(listItem);
+
                     }
                 }
+                SimpleAdapter simpleAdapter = new SimpleAdapter(gradesStudent.this, listArray,
+                        android.R.layout.simple_list_item_2,
+                        new String[] {"titleKey", "detailKey" },
+                        new int[] {android.R.id.text1, android.R.id.text2 });
+                listView.setAdapter(simpleAdapter);
             }
 
             @Override
@@ -67,11 +87,8 @@ public class gradesStudent extends AppCompatActivity implements View.OnClickList
 
             }
         });
+
     }
 
-    @Override
-        public void onClick (View v){
-
-        }
 
 }

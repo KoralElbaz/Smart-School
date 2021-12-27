@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/screen2"
-    tools:context=".gradesTeacher">
+    tools:context=".updateGrade_levelTwo">
 
 
     <TextView
@@ -28,7 +28,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/row1"
         android:layout_below="@+id/title"
-        android:text="Select a ClassRoom:"
+        android:text="Select a student:"
         android:textSize="30dp"
         android:textStyle="bold"
         android:layout_marginTop="90dp"
@@ -37,7 +37,7 @@
 
 
     <ListView
-        android:id="@+id/listview"
+        android:id="@+id/students_grade_list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@+id/row1"

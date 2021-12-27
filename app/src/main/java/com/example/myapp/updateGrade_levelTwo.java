@@ -36,54 +36,62 @@ public class updateGrade_levelTwo extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_placement_student2);
+        setContentView(R.layout.activity_update_grades_level2);
+
+        Toast.makeText(updateGrade_levelTwo.this, "create", Toast.LENGTH_SHORT).show();
 
         database = FirebaseDatabase.getInstance();
-        listView=(ListView) findViewById(R.id.listview);
+        listView=(ListView) findViewById(R.id.students_grade_list);
         Teachers = database.getReference("Teachers");
         Lessons = database.getReference("Lessons");
         sAuth = FirebaseAuth.getInstance();
         student=new Student();
 
         Teachers.addValueEventListener(new ValueEventListener() {
-            @SuppressLint("SetTextI18n")
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
+                Toast.makeText(updateGrade_levelTwo.this, "inside sanpshot: " , Toast.LENGTH_SHORT).show();
                 for(DataSnapshot ds: snapshot.getChildren()){
+                    Toast.makeText(updateGrade_levelTwo.this, "inside sanpshot: "+ds.getKey() , Toast.LENGTH_SHORT).show();
                     if(ds.hasChild(Objects.requireNonNull(sAuth.getUid()))){
-                        Teacher t = new Teacher();
-                        lessonName=Objects.requireNonNull(ds.child(sAuth.getUid()).getValue(Teacher.class)).getName_lesson();
+                        Toast.makeText(updateGrade_levelTwo.this, " insideIf: "+ds.getKey() , Toast.LENGTH_SHORT).show();
+                        lessonName=ds.getKey();
+                        Toast.makeText(updateGrade_levelTwo.this, "-> "+lessonName, Toast.LENGTH_SHORT).show();
                     }
                 }
             }
+
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
 
             }
         });
+        Toast.makeText(updateGrade_levelTwo.this, " lessonName: "+lessonName , Toast.LENGTH_SHORT).show();
 
-        ArrayList<String> emailList=new ArrayList<>();
+        ArrayList<String> names=new ArrayList<>();
         ArrayList<String> uidList=new ArrayList<>();
-        Map<String,Student> studentMap=new HashMap<>();
 
 
-
-        ArrayAdapter arrayAdapter=new ArrayAdapter<>(this, android.R.layout.simple_list_item_1,emailList);
+        ArrayAdapter arrayAdapter=new ArrayAdapter<>(this, android.R.layout.simple_list_item_1,names);
 
         Intent intent = this.getIntent();
 
         if(intent!=null)
         {
             String grade = intent.getStringExtra("grade");
-
-            Lessons.child(lessonName).child(grade).addValueEventListener(new ValueEventListener() {
+            Lessons.child(lessonName).child("students_CourseGrade").addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
                     for(DataSnapshot ds :snapshot.getChildren()){
+                        Toast.makeText(updateGrade_levelTwo.this, " in DataChange" , Toast.LENGTH_SHORT).show();
                         student = ds.getValue(Student.class);
-                        emailList.add(student.getEmail());
-                        uidList.add(student.getFbUID());
-                        studentMap.put(student.getFbUID(),student);
+                       if(student.get_grade().equals(grade)){
+                           Toast.makeText(updateGrade_levelTwo.this, " inside if "+ student.get_grade(), Toast.LENGTH_SHORT).show();
+                           names.add(student.getFull_name());
+                           Toast.makeText(updateGrade_levelTwo.this, "-> "+student.getFull_name(), Toast.LENGTH_SHORT).show();
+                           uidList.add(student.getFbUID());
+
+                       }
                     }
                     listView.setAdapter(arrayAdapter);
                 }
@@ -100,12 +108,12 @@ public class updateGrade_levelTwo extends AppCompatActivity {
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id)
                 {
 
-                    Toast.makeText(updateGrade_levelTwo.this, "-> "+emailList.get(position), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(updateGrade_levelTwo.this, "-> "+uidList.get(position), Toast.LENGTH_SHORT).show();
 
                     Intent i = new Intent(getApplicationContext(),updateGrades.class);
                     i.putExtra("grade",grade);
                     i.putExtra("uid",uidList.get(position));
-                    i.putExtra("email",emailList.get(position));
+                    i.putExtra("email",uidList.get(position));
                     startActivity(i);
 
                 }

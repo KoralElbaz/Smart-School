@@ -29,6 +29,9 @@ public class menuStudent extends AppCompatActivity implements View.OnClickListen
         Profile= findViewById(R.id.Profile);
         Profile.setOnClickListener(this);
 
+        Profile= findViewById(R.id.Lessons);
+        Profile.setOnClickListener(this);
+
 
 
     }
@@ -48,6 +51,9 @@ public class menuStudent extends AppCompatActivity implements View.OnClickListen
                 break;
             case R.id.Profile:
                 startActivity(new Intent(this, profileStudent.class));
+                break;
+            case  R.id.Lessons:
+                startActivity(new Intent(this, studentLessonsList.class));
                 break;
         }
 

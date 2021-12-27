@@ -51,7 +51,7 @@ public class menuTeacher extends AppCompatActivity implements View.OnClickListen
                 startActivity(new Intent(this, TestDate.class));
                 break;
             case R.id.StudentsList:
-                startActivity(new Intent(this, studentList.class));
+                startActivity(new Intent(this, TeacherStudentsList.class));
                 break;
 
         }

@@ -45,7 +45,7 @@ public class signIn extends AppCompatActivity implements View.OnClickListener {
 
     private EditText  Email , Password ;
     private String email , pass ;
-    private boolean value1 , value2;
+    private boolean isTeacher, value1 , value2;
 
 
     @Override
@@ -63,6 +63,7 @@ public class signIn extends AppCompatActivity implements View.OnClickListener {
 
         Email = (EditText)findViewById(R.id.email);
         Password = (EditText)findViewById(R.id.PasswordTeacher);
+        isTeacher=false;
 
 
         Secretariat=database.getReference("Secretariat");
@@ -97,7 +98,11 @@ public class signIn extends AppCompatActivity implements View.OnClickListener {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot)
             {
-                if (snapshot.hasChild(fUser.getUid())) // is a teacher
+                for(DataSnapshot ds: snapshot.getChildren()){
+                    if (ds.hasChild(fUser.getUid()))
+                        isTeacher = true;
+                }
+                if (isTeacher) // is a teacher
                 {
                     sAuth.signInWithEmailAndPassword(email,pass).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                         @Override
