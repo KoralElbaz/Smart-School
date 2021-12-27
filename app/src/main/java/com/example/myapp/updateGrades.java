@@ -25,7 +25,7 @@ public class updateGrades extends AppCompatActivity implements View.OnClickListe
 
     private FirebaseDatabase database;
     private DatabaseReference ClassRoom;
-    private DatabaseReference Lesson;
+    private DatabaseReference Lessons;
 
     private Button updateBtn, backbtn;
     private TextView fullName, id ;
@@ -41,10 +41,13 @@ public class updateGrades extends AppCompatActivity implements View.OnClickListe
 
         database = FirebaseDatabase.getInstance();
         ClassRoom = database.getReference("ClassRoom");
-        Lesson = database.getReference("Lesson");
+        Lessons = database.getReference("Lessons");
 
         updateBtn=findViewById(R.id.updateBtn);
+        updateBtn.setOnClickListener(this);
+
         backbtn = findViewById(R.id.backBtn);
+        backbtn.setOnClickListener(this);
 
         fullName = findViewById(R.id.fillName);
         id = findViewById(R.id.fillID);
@@ -81,23 +84,6 @@ public class updateGrades extends AppCompatActivity implements View.OnClickListe
                 }
             });
 
-
-//
-//            updateBtn.setOnClickListener(new View.OnClickListener() {
-//
-//                @Override
-//                public void onClick(View v) {
-//
-//                }
-//            });
-//
-//            backbtn.setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View v) {
-//
-//                }
-//            });
-
         }
 
     }
@@ -109,7 +95,8 @@ public class updateGrades extends AppCompatActivity implements View.OnClickListe
         {
             case R.id.updateBtn: //update student grade
                 String given_grade = grade.getText().toString();
-                Lesson.child(lesson_name).child("students_CourseGrade").child(uid).setValue(given_grade);
+                Lessons.child(lesson_name).child("students_CourseGrade").child(uid).setValue(given_grade);
+                Toast.makeText(updateGrades.this, "upgrade grade Successfully " , Toast.LENGTH_SHORT).show();
                 break;
 
             case R.id.backBtn:

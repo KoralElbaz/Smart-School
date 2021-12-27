@@ -108,12 +108,10 @@ public class updateGrade_levelTwo extends AppCompatActivity {
 
                         }
                     }
-                    Toast.makeText(updateGrade_levelTwo.this, " end of data change: "+lessonName , Toast.LENGTH_SHORT).show();
                 }
 
                 @Override
                 public void onCancelled(@NonNull DatabaseError error) {
-                    Toast.makeText(updateGrade_levelTwo.this, " cancelled: " , Toast.LENGTH_SHORT).show();
                 }
             });
 
@@ -122,8 +120,6 @@ public class updateGrade_levelTwo extends AppCompatActivity {
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id)
                 {
-
-                    Toast.makeText(updateGrade_levelTwo.this, "-> "+uidList.get(position), Toast.LENGTH_SHORT).show();
 
                     Intent i = new Intent(getApplicationContext(),updateGrades.class);
                     i.putExtra("uid",uidList.get(position));
