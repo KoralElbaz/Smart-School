@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -24,13 +25,14 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class PlacementStudent4 extends AppCompatActivity {
+public class PlacementStudent4 extends AppCompatActivity{
 
     private FirebaseDatabase database;
     private DatabaseReference Teachers;
     private DatabaseReference Lessons;
     private Teacher teacher;
     ListView listView;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,7 +42,6 @@ public class PlacementStudent4 extends AppCompatActivity {
         database = FirebaseDatabase.getInstance();
         Teachers = database.getReference("Teachers");
         Lessons = database.getReference("Lessons");
-
 
         database = FirebaseDatabase.getInstance();
         listView=(ListView) findViewById(R.id.listview);
@@ -103,7 +104,7 @@ public class PlacementStudent4 extends AppCompatActivity {
                                 @Override
                                 public void onSuccess(Object o) {
                                     Toast.makeText(PlacementStudent4.this, "The Placement Successfully", Toast.LENGTH_LONG).show();
-                                    Intent i = new Intent(getApplicationContext(),PlacementStudent.class);
+                                    Intent i = new Intent(getApplicationContext(),menuSecretary.class);
                                     startActivity(i);
                                 }
                             });
@@ -114,4 +115,5 @@ public class PlacementStudent4 extends AppCompatActivity {
         }
 
     }
+
 }
