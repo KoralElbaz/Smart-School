@@ -25,11 +25,11 @@
 
     <LinearLayout
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="100dp"
         android:id="@+id/Profile"
         android:layout_below="@+id/Menu"
         android:layout_marginLeft="5dp"
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="70dp"
         android:padding="10dp">
 
         <ImageView
@@ -51,7 +51,7 @@
 
     <LinearLayout
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="100dp"
         android:id="@+id/Grades"
         android:layout_below="@+id/Profile"
         android:layout_marginLeft="5dp"
@@ -78,7 +78,7 @@
     <LinearLayout
         android:id="@+id/Presence"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="100dp"
         android:layout_below="@+id/Grades"
         android:layout_marginLeft="5dp"
         android:layout_marginTop="1dp"
@@ -104,7 +104,7 @@
 
     <LinearLayout
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="100dp"
         android:id="@+id/Lessons"
         android:layout_below="@+id/Presence"
         android:layout_marginLeft="5dp"
@@ -126,6 +126,19 @@
             android:layout_marginVertical="20dp"
             android:textStyle="bold" />
 
+
     </LinearLayout>
+
+    <Button
+        android:id="@+id/LogoutBtn"
+        android:layout_width="210dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/Presence"
+        android:layout_centerHorizontal="true"
+        android:backgroundTint="#a0a0a0"
+        android:layout_marginLeft="-150dp"
+        android:layout_marginTop="100dp"
+        android:text="Logout" />
+
 
 </RelativeLayout>

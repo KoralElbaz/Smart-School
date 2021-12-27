@@ -25,7 +25,7 @@
 
     <LinearLayout
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="90dp"
         android:id="@+id/Profile"
         android:layout_below="@+id/Menu"
         android:layout_marginLeft="5dp"
@@ -51,7 +51,7 @@
 
     <LinearLayout
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="90dp"
         android:id="@+id/Grades"
         android:layout_below="@+id/Profile"
         android:layout_marginLeft="5dp"
@@ -77,7 +77,7 @@
 
     <LinearLayout
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="95dp"
         android:id="@+id/Presence"
         android:layout_below="@+id/Grades"
         android:layout_marginLeft="5dp"
@@ -104,7 +104,7 @@
 
     <LinearLayout
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="90dp"
         android:id="@+id/StudentsList"
         android:layout_below="@+id/Presence"
         android:layout_marginLeft="5dp"
@@ -127,6 +127,17 @@
             android:textStyle="bold" />
 
     </LinearLayout>
+
+    <Button
+        android:id="@+id/LogoutBtn"
+        android:layout_width="210dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/StudentsList"
+        android:layout_centerHorizontal="true"
+        android:backgroundTint="#a0a0a0"
+        android:layout_marginLeft="-150dp"
+        android:layout_marginTop="12dp"
+        android:text="Logout" />
 
 
 

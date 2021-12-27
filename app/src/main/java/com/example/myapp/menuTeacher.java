@@ -3,15 +3,21 @@ package com.example.myapp;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
 public class menuTeacher extends AppCompatActivity implements View.OnClickListener{
 
     private LinearLayout Grades ,  Presence , Profile,  StudentsList;
+    Button LogoutBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,6 +35,9 @@ public class menuTeacher extends AppCompatActivity implements View.OnClickListen
 
         StudentsList = findViewById(R.id.StudentsList);
         StudentsList.setOnClickListener(this);
+
+        LogoutBtn = findViewById(R.id.LogoutBtn);
+        LogoutBtn.setOnClickListener(this);
     }
 
     @Override
@@ -46,6 +55,35 @@ public class menuTeacher extends AppCompatActivity implements View.OnClickListen
                 break;
             case R.id.StudentsList:
                 startActivity(new Intent(this, TeacherStudentsList.class));
+                break;
+            case R.id.LogoutBtn:
+                AlertDialog.Builder builder=new AlertDialog.Builder(menuTeacher.this); //Home is name of the activity
+                builder.setMessage("Do you want to exit?");
+                builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int id) {
+
+                        finish();
+                        Intent i=new Intent();
+                        i.putExtra("finish", true);
+                        i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP); // To clean up all activities
+                        //startActivity(i);
+                        finish();
+
+                    }
+                });
+
+                builder.setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int id) {
+                        dialog.cancel();
+                    }
+                });
+
+                AlertDialog alert=builder.create();
+                alert.show();
+
+
                 break;
 
         }
