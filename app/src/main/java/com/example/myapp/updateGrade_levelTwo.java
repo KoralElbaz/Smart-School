@@ -21,6 +21,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
@@ -28,9 +29,10 @@ public class updateGrade_levelTwo extends AppCompatActivity {
     private FirebaseDatabase database;
     private DatabaseReference Teachers;
     private DatabaseReference Lessons;
+    private DatabaseReference ClassRoom;
     private FirebaseAuth sAuth;
     private String lessonName;
-    private Student student;
+    private String studentUID;
     ListView listView;
 
     @Override
@@ -38,35 +40,13 @@ public class updateGrade_levelTwo extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_update_grades_level2);
 
-        Toast.makeText(updateGrade_levelTwo.this, "create", Toast.LENGTH_SHORT).show();
-
         database = FirebaseDatabase.getInstance();
         listView=(ListView) findViewById(R.id.students_grade_list);
         Teachers = database.getReference("Teachers");
         Lessons = database.getReference("Lessons");
+        ClassRoom = database.getReference("ClassRoom");
         sAuth = FirebaseAuth.getInstance();
-        student=new Student();
 
-        Teachers.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                Toast.makeText(updateGrade_levelTwo.this, "inside sanpshot: " , Toast.LENGTH_SHORT).show();
-                for(DataSnapshot ds: snapshot.getChildren()){
-                    Toast.makeText(updateGrade_levelTwo.this, "inside sanpshot: "+ds.getKey() , Toast.LENGTH_SHORT).show();
-                    if(ds.hasChild(Objects.requireNonNull(sAuth.getUid()))){
-                        Toast.makeText(updateGrade_levelTwo.this, " insideIf: "+ds.getKey() , Toast.LENGTH_SHORT).show();
-                        lessonName=ds.getKey();
-                        Toast.makeText(updateGrade_levelTwo.this, "-> "+lessonName, Toast.LENGTH_SHORT).show();
-                    }
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
-        Toast.makeText(updateGrade_levelTwo.this, " lessonName: "+lessonName , Toast.LENGTH_SHORT).show();
 
         ArrayList<String> names=new ArrayList<>();
         ArrayList<String> uidList=new ArrayList<>();
@@ -78,27 +58,62 @@ public class updateGrade_levelTwo extends AppCompatActivity {
 
         if(intent!=null)
         {
+
             String grade = intent.getStringExtra("grade");
-            Lessons.child(lessonName).child("students_CourseGrade").addValueEventListener(new ValueEventListener() {
+
+            Teachers.addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
-                    for(DataSnapshot ds :snapshot.getChildren()){
-                        Toast.makeText(updateGrade_levelTwo.this, " in DataChange" , Toast.LENGTH_SHORT).show();
-                        student = ds.getValue(Student.class);
-                       if(student.get_grade().equals(grade)){
-                           Toast.makeText(updateGrade_levelTwo.this, " inside if "+ student.get_grade(), Toast.LENGTH_SHORT).show();
-                           names.add(student.getFull_name());
-                           Toast.makeText(updateGrade_levelTwo.this, "-> "+student.getFull_name(), Toast.LENGTH_SHORT).show();
-                           uidList.add(student.getFbUID());
+                    for(DataSnapshot ds: snapshot.getChildren()){
+                        if(ds.hasChild(Objects.requireNonNull(sAuth.getUid()))) {
+                            lessonName = ds.getKey();
 
-                       }
+                            Lessons.child(lessonName).child("students_CourseGrade").addValueEventListener(new ValueEventListener() {
+                                @Override
+                                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                    for(DataSnapshot ds :snapshot.getChildren()){
+                                        studentUID = ds.getKey();
+                                        List<String> uid = new ArrayList();
+                                        uid.add(studentUID);
+
+                                        ClassRoom.child(grade).addListenerForSingleValueEvent(new ValueEventListener() {
+                                            @Override
+                                            public void onDataChange(@NonNull DataSnapshot snapshot) {
+
+                                                    for (DataSnapshot dsUID: snapshot.getChildren()){
+                                                        if(uid.contains(dsUID.getKey())){
+                                                            uidList.add(dsUID.getKey());
+                                                            names.add(dsUID.child("full_name").getValue().toString());
+                                                        }
+                                                    }
+                                                listView.setAdapter(arrayAdapter);
+                                            }
+                                            //}
+
+                                            @Override
+                                            public void onCancelled(@NonNull DatabaseError error) {
+
+                                            }
+                                        });
+                                    }
+                                    //listView.setAdapter(arrayAdapter);
+                                }
+
+                                @Override
+                                public void onCancelled(@NonNull DatabaseError error) {
+                                    throw error.toException(); // don't ignore errors
+                                }
+                            });
+
+
+                        }
                     }
-                    listView.setAdapter(arrayAdapter);
+                    Toast.makeText(updateGrade_levelTwo.this, " end of data change: "+lessonName , Toast.LENGTH_SHORT).show();
                 }
 
                 @Override
                 public void onCancelled(@NonNull DatabaseError error) {
-                    throw error.toException(); // don't ignore errors
+                    Toast.makeText(updateGrade_levelTwo.this, " cancelled: " , Toast.LENGTH_SHORT).show();
                 }
             });
 
@@ -118,7 +133,9 @@ public class updateGrade_levelTwo extends AppCompatActivity {
 
                 }
             });
+
         }
+
 
     }
 }
