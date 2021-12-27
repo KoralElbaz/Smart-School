@@ -126,9 +126,10 @@ public class updateGrade_levelTwo extends AppCompatActivity {
                     Toast.makeText(updateGrade_levelTwo.this, "-> "+uidList.get(position), Toast.LENGTH_SHORT).show();
 
                     Intent i = new Intent(getApplicationContext(),updateGrades.class);
-                    i.putExtra("grade",grade);
                     i.putExtra("uid",uidList.get(position));
-                    i.putExtra("email",uidList.get(position));
+                    i.putExtra("classGrade",grade);
+                    i.putExtra("lessonName",lessonName);
+                    i.putExtra("full_name",names.get(position));
                     startActivity(i);
 
                 }
