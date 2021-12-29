@@ -1,13 +1,7 @@
-package com.example.myapp;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
+package com.example.myapp.view;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -17,14 +11,15 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.widget.Toolbar;
 
-import com.google.android.gms.tasks.OnCompleteListener;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.myapp.R;
+import com.example.myapp.model.Student;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -38,24 +33,24 @@ import com.squareup.picasso.Picasso;
 
 import java.util.Objects;
 
+public class profileStudent extends AppCompatActivity {
 
-public class profileTeacher extends AppCompatActivity  {
 
     private FirebaseDatabase database;
     private FirebaseAuth sAuth;
-    private DatabaseReference Teachers;
+    private DatabaseReference ClassRoom;
 
 
-    private TextView fullName, id, lessonName, email;
-    private  Button changeProfilePicture;
+    private TextView fullName, id, nameSchool, email;
+    private Button changeProfilePicture;
     private ImageView profileImage;
     StorageReference storageReference;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_profile_teacher);
+        setContentView(R.layout.activity_profile_student);
+
 
         database = FirebaseDatabase.getInstance();
         sAuth = FirebaseAuth.getInstance();
@@ -68,26 +63,27 @@ public class profileTeacher extends AppCompatActivity  {
             }
         });
 
-        Teachers = database.getReference("Teachers");
+        ClassRoom = database.getReference("ClassRoom");
         fullName = findViewById(R.id.fill1);
         id = findViewById(R.id.fill2);
-        lessonName = findViewById(R.id.fill3);
+        nameSchool = findViewById(R.id.fill3);
         email = findViewById(R.id.fill4);
 
         profileImage = findViewById(R.id.profileImage);
         changeProfilePicture = findViewById(R.id.ChangePicture);
 
-        Teachers.addValueEventListener(new ValueEventListener() {
+
+        ClassRoom.addValueEventListener(new ValueEventListener() {
             @SuppressLint("SetTextI18n")
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for(DataSnapshot ds: snapshot.getChildren()){
                     if(ds.hasChild(Objects.requireNonNull(sAuth.getUid()))){
-                        Teacher t = new Teacher();
-                        fullName.setText(Objects.requireNonNull(ds.child(sAuth.getUid()).getValue(Teacher.class)).getFull_name());
-                        id.setText((int)Objects.requireNonNull(ds.child(sAuth.getUid()).getValue(Teacher.class)).getId()+"");
-                        lessonName.setText(Objects.requireNonNull(ds.child(sAuth.getUid()).getValue(Teacher.class)).getName_lesson());
-                        email.setText(Objects.requireNonNull(ds.child(sAuth.getUid()).getValue(Teacher.class)).getEmail());
+                        Student s = new Student();
+                        fullName.setText(Objects.requireNonNull(ds.child(sAuth.getUid()).getValue(Student.class)).getFull_name());
+                        id.setText((int)Objects.requireNonNull(ds.child(sAuth.getUid()).getValue(Student.class)).getId()+"");
+                        nameSchool.setText(Objects.requireNonNull(ds.child(sAuth.getUid()).getValue(Student.class)).get_grade());
+                        email.setText(Objects.requireNonNull(ds.child(sAuth.getUid()).getValue(Student.class)).getEmail());
 
                     }
                 }
@@ -100,13 +96,12 @@ public class profileTeacher extends AppCompatActivity  {
         });
 
 
-
         changeProfilePicture.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
                 //open gallery
-                Intent openGalleryIntent = new Intent(Intent.ACTION_PICK,MediaStore.Images.Media.EXTERNAL_CONTENT_URI ); //first - going to pick some data, second- from where (return the uri of pic that user click on.
+                Intent openGalleryIntent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI ); //first - going to pick some data, second- from where (return the uri of pic that user click on.
                 startActivityForResult(openGalleryIntent, 1000);//picking and extracting the data
             }
         });
@@ -141,8 +136,10 @@ public class profileTeacher extends AppCompatActivity  {
         }).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
-                Toast.makeText(profileTeacher.this, "Image Uploaded failed", Toast.LENGTH_SHORT).show();
+                Toast.makeText(profileStudent.this, "Image Uploaded failed", Toast.LENGTH_SHORT).show();
             }
         });
     }
+
+
 }

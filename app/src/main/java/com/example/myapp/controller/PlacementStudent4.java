@@ -1,4 +1,4 @@
-package com.example.myapp;
+package com.example.myapp.controller;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -8,12 +8,13 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.example.myapp.R;
+import com.example.myapp.view.menuSecretary;
+import com.example.myapp.model.Teacher;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -22,7 +23,6 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 public class PlacementStudent4 extends AppCompatActivity{
@@ -119,7 +119,7 @@ public class PlacementStudent4 extends AppCompatActivity{
                                                         @Override
                                                         public void onSuccess(Object o) {
                                                             Toast.makeText(PlacementStudent4.this, "The Registration Successfully", Toast.LENGTH_LONG).show();
-                                                            Intent i = new Intent(getApplicationContext(),menuSecretary.class);
+                                                            Intent i = new Intent(getApplicationContext(), menuSecretary.class);
                                                             startActivity(i);
                                                             finish();
                                                         }

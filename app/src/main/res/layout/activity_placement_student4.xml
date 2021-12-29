@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".PlacementStudent4"
+    tools:context=".controller.PlacementStudent4"
     android:background="@drawable/screen2">
 
     <TextView

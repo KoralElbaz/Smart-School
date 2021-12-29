@@ -1,4 +1,4 @@
-package com.example.myapp;
+package com.example.myapp.controller;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -10,6 +10,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.myapp.R;
+import com.example.myapp.view.menuSecretary;
+import com.example.myapp.model.Student;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -21,21 +24,25 @@ import com.google.firebase.database.FirebaseDatabase;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class TeacherRegistration extends AppCompatActivity implements View.OnClickListener{
+public class StudentRegistration extends AppCompatActivity implements View.OnClickListener {
 
     private FirebaseUser fUser;
     private FirebaseDatabase database;
     private FirebaseAuth sAuth;
     private DatabaseReference ClassRoom;
     private DatabaseReference Teachers;
+    private DatabaseReference Tenth;
+    private DatabaseReference Eleventh;
+    private DatabaseReference Twelfth;
 
     private Button signIn;
-    private EditText FullName , ID , Email  , Password , LessonName;
+    private EditText FullName , ID , Email  , Password ,Grade;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_teacher_registration);
+        setContentView(R.layout.activity_student_registration);
 
         database = FirebaseDatabase.getInstance();
         sAuth = FirebaseAuth.getInstance();
@@ -50,12 +57,17 @@ public class TeacherRegistration extends AppCompatActivity implements View.OnCli
         ID = findViewById(R.id.ID);
         Email = findViewById(R.id.Email);
         Password = findViewById(R.id.Password);
-        LessonName= findViewById(R.id.LessonName);
+
+        Grade= findViewById(R.id.Grade);
+
 
     }
 
+
+
     @Override
-    public void onClick(View v) {
+    public void onClick(View v)
+    {
         switch (v.getId())
         {
             case R.id.signIn:
@@ -69,14 +81,14 @@ public class TeacherRegistration extends AppCompatActivity implements View.OnCli
         String full_name=FullName.getText().toString().trim();
         String id=ID.getText().toString().trim();
         String email=Email.getText().toString().trim();
-        String lesson_name=LessonName.getText().toString().trim();
         String password=Password.getText().toString().trim();
+        String grade=Grade.getText().toString().trim();
 
-        validation(full_name,id,email,lesson_name,password);
+        validation(full_name,id,email,grade,password);
 
     }
 
-    private void signUpStudent(String full_name, String id, String email, String lesson_name, String password)
+    private void signUpStudent(String full_name, String id, String email, String grade, String password)
     {
         sAuth.createUserWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
@@ -84,24 +96,24 @@ public class TeacherRegistration extends AppCompatActivity implements View.OnCli
             {
                 if (task.isSuccessful())
                 {
-                    Toast.makeText(TeacherRegistration.this, "Registered Successfully", Toast.LENGTH_LONG).show();
+                    Toast.makeText(StudentRegistration.this, "Registered Successfully", Toast.LENGTH_LONG).show();
 
-                    Teacher temp = new Teacher(fUser.getUid(),full_name,Long.parseLong(id),email,lesson_name,password);
-                    Teachers.child(lesson_name).child(fUser.getUid()).setValue(temp);
-                    Intent i = new Intent(getApplicationContext(),menuSecretary.class);
-                    startActivity(i);
-                    finish();
+                        Student temp = new Student(fUser.getUid(),full_name,Long.parseLong(id),email,grade,password);
+                        ClassRoom.child(grade).child(fUser.getUid()).setValue(temp);
+                        Intent i = new Intent(getApplicationContext(), menuSecretary.class);
+                        startActivity(i);
+                        finish();
                 }
                 else
                 {
-                    Toast.makeText(TeacherRegistration.this, "Registered unsuccessfully", Toast.LENGTH_LONG).show();
+                    Toast.makeText(StudentRegistration.this, "Registered unsuccessfully", Toast.LENGTH_LONG).show();
                 }
             }});
 
         database.getReference();
     }
 
-    private void validation(String full_name, String id, String email, String lesson_name, String password)
+    private void validation(String full_name, String id, String email, String grade, String password)
     {
 
         // מינימום שמונה תווים, לפחות אות אחת ומספר אחד:
@@ -119,7 +131,7 @@ public class TeacherRegistration extends AppCompatActivity implements View.OnCli
         //            Validation full name
         if (!isValid(full_name,FULLNAME_PATTERN) && !full_name.equals(null))
         {
-            Toast.makeText(TeacherRegistration.this, "InValid fullName - A full name contains two words at least 2 characters long and a space between them", Toast.LENGTH_SHORT).show();
+            Toast.makeText(StudentRegistration.this, "InValid fullName - A full name contains two words at least 2 characters long and a space between them", Toast.LENGTH_SHORT).show();
             return;
         }
 
@@ -128,14 +140,14 @@ public class TeacherRegistration extends AppCompatActivity implements View.OnCli
         //            Validation email
         if (!isValid(email,EMAIL_PATTERN) && !email.equals(null))
         {
-            Toast.makeText(TeacherRegistration.this, "InValid email - Email contains familiar marks in order such as: @.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(StudentRegistration.this, "InValid email - Email contains familiar marks in order such as: @.", Toast.LENGTH_SHORT).show();
             return;
         }
 
         //            Validation id
         if (!isValid(id,ID_PATTERN) && !id.equals(null))
         {
-            Toast.makeText(TeacherRegistration.this, "InValid id - An ID card contains exactly 9 numbers", Toast.LENGTH_SHORT).show();
+            Toast.makeText(StudentRegistration.this, "InValid id - An ID card contains exactly 9 numbers", Toast.LENGTH_SHORT).show();
 
             return;
         }
@@ -143,17 +155,18 @@ public class TeacherRegistration extends AppCompatActivity implements View.OnCli
         //            Validation password
         if (!isValid(password,PASSWORD_PATTERN) && !password.equals(null))
         {
-            Toast.makeText(TeacherRegistration.this, "InValid password - A password consists of a minimum of eight characters, at least one letter and one number:", Toast.LENGTH_SHORT).show();
+            Toast.makeText(StudentRegistration.this, "InValid password - A password consists of a minimum of eight characters, at least one letter and one number:", Toast.LENGTH_SHORT).show();
             return;
         }
 
-        //            Validation LessonName
-        if (!lesson_name.equals(null) && !(lesson_name.equals("Math") || lesson_name.equals("Computers") || lesson_name.equals("English") ))
+        //            Validation grade
+        if (!grade.equals(null) && !(grade.equals("Tenth") || grade.equals("Eleventh") || grade.equals("Twelfth") ))
         {
-            Toast.makeText(TeacherRegistration.this, "InValid LessonName - You need to insert Math/Computers/English", Toast.LENGTH_SHORT).show();
+            Toast.makeText(StudentRegistration.this, "InValid grade - You need to insert Tenth/Eleventh/Twelfth", Toast.LENGTH_SHORT).show();
             return;
         }
-        signUpStudent(full_name,id,email,lesson_name,password);
+
+        signUpStudent(full_name,id,email,grade,password);
 
     }
 

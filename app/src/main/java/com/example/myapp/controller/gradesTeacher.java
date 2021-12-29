@@ -1,18 +1,16 @@
-package com.example.myapp;
+package com.example.myapp.controller;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
-import android.media.metrics.TrackChangeEvent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.Toast;
 
-import com.google.firebase.auth.FirebaseAuth;
+import com.example.myapp.R;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -20,11 +18,9 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
 
-public class TeacherStudentsList extends AppCompatActivity {
+public class gradesTeacher extends AppCompatActivity {
+
     private FirebaseDatabase database;
     private DatabaseReference ClassRoom;
     private String grade;
@@ -33,10 +29,10 @@ public class TeacherStudentsList extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_teacher_students_list);
+        setContentView(R.layout.activity_grades_teacher);
 
         database = FirebaseDatabase.getInstance();
-        listView=(ListView) findViewById(R.id.studentslistview);
+        listView=(ListView) findViewById(R.id.listview);
         ClassRoom = database.getReference("ClassRoom");
 
 
@@ -66,12 +62,13 @@ public class TeacherStudentsList extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id)
             {
-                Intent i = new Intent(getApplicationContext(),TeacherStudentsListLevelTwo.class);
+
+                Intent i = new Intent(getApplicationContext(),updateGrade_levelTwo.class);
                 i.putExtra("grade",gradeList.get(position));
                 startActivity(i);
+
             }
         });
-
     }
 
 }

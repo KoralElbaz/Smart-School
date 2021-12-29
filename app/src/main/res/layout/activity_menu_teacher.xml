@@ -7,7 +7,7 @@
     android:background="@drawable/screen2"
     android:orientation="vertical"
     android:weightSum="10"
-    tools:context=".menuTeacher">
+    tools:context=".view.menuTeacher">
 
     <TextView
         android:id="@+id/Menu"

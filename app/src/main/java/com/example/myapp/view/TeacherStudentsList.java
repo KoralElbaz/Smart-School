@@ -1,4 +1,4 @@
-package com.example.myapp;
+package com.example.myapp.view;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -10,6 +10,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
+import com.example.myapp.R;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -18,21 +19,19 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
-public class studentList extends AppCompatActivity {
-
+public class TeacherStudentsList extends AppCompatActivity {
     private FirebaseDatabase database;
     private DatabaseReference ClassRoom;
-    private Student student;
     private String grade;
     ListView listView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_student_list);
+        setContentView(R.layout.activity_teacher_students_list);
 
         database = FirebaseDatabase.getInstance();
-        listView=(ListView) findViewById(R.id.listview);
+        listView=(ListView) findViewById(R.id.studentslistview);
         ClassRoom = database.getReference("ClassRoom");
 
 
@@ -60,14 +59,14 @@ public class studentList extends AppCompatActivity {
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
-                Intent i = new Intent(getApplicationContext(),studentList2.class);
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id)
+            {
+                Intent i = new Intent(getApplicationContext(),TeacherStudentsListLevelTwo.class);
                 i.putExtra("grade",gradeList.get(position));
                 startActivity(i);
             }
         });
 
-
     }
+
 }

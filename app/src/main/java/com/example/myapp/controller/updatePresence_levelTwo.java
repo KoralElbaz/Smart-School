@@ -1,17 +1,16 @@
-package com.example.myapp;
+package com.example.myapp.controller;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.ListView;
-import android.widget.Toast;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
+import com.example.myapp.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -23,7 +22,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-public class TeacherStudentsListLevelTwo extends AppCompatActivity implements View.OnClickListener {
+public class updatePresence_levelTwo extends AppCompatActivity {
 
     private FirebaseDatabase database;
     private DatabaseReference Teachers;
@@ -32,26 +31,22 @@ public class TeacherStudentsListLevelTwo extends AppCompatActivity implements Vi
     private FirebaseAuth sAuth;
     private String lessonName;
     private String studentUID;
-    private Button backbtn;
     ListView listView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.teacher_student_list_level2);
+        setContentView(R.layout.activity_update_presence_level2);
 
         database = FirebaseDatabase.getInstance();
-        listView=(ListView) findViewById(R.id.students_names_list);
+        listView=(ListView) findViewById(R.id.students_grade_list);
         Teachers = database.getReference("Teachers");
         Lessons = database.getReference("Lessons");
         ClassRoom = database.getReference("ClassRoom");
         sAuth = FirebaseAuth.getInstance();
 
-        backbtn = findViewById(R.id.backBtn);
-        backbtn.setOnClickListener(this);
-
-
         ArrayList<String> names=new ArrayList<>();
+        ArrayList<String> uidList=new ArrayList<>();
 
 
         ArrayAdapter arrayAdapter=new ArrayAdapter<>(this, android.R.layout.simple_list_item_1,names);
@@ -84,6 +79,7 @@ public class TeacherStudentsListLevelTwo extends AppCompatActivity implements Vi
 
                                                 for (DataSnapshot dsUID: snapshot.getChildren()){
                                                     if(uid.contains(dsUID.getKey())){
+                                                        uidList.add(dsUID.getKey());
                                                         names.add(dsUID.child("full_name").getValue().toString());
                                                     }
                                                 }
@@ -97,6 +93,7 @@ public class TeacherStudentsListLevelTwo extends AppCompatActivity implements Vi
                                             }
                                         });
                                     }
+                                    //listView.setAdapter(arrayAdapter);
                                 }
 
                                 @Override
@@ -116,17 +113,23 @@ public class TeacherStudentsListLevelTwo extends AppCompatActivity implements Vi
             });
 
 
+            listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id)
+                {
+
+                    Intent i = new Intent(getApplicationContext(),updatePresence.class);
+                    i.putExtra("uid",uidList.get(position));
+                    i.putExtra("classGrade",grade);
+                    i.putExtra("lessonName",lessonName);
+                    i.putExtra("full_name",names.get(position));
+                    startActivity(i);
+
+                }
+            });
+
         }
 
 
-    }
-
-    @Override
-    public void onClick(View v) {
-        if(v.getId() == R.id.backBtn) {
-            Intent i = new Intent(getApplicationContext(), menuTeacher.class);
-            startActivity(i);
-            finish();
-        }
     }
 }

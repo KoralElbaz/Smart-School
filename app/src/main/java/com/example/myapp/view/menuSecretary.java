@@ -1,78 +1,75 @@
-package com.example.myapp;
+package com.example.myapp.view;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.AlertDialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
-import android.widget.TextView;
-import android.widget.Toast;
 
+import com.example.myapp.R;
+import com.example.myapp.controller.PlacementStudent;
+import com.example.myapp.controller.StudentRegistration;
+import com.example.myapp.controller.TeacherRegistration;
 import com.google.firebase.auth.FirebaseAuth;
 
-public class menuStudent extends AppCompatActivity implements View.OnClickListener{
+public class menuSecretary extends AppCompatActivity implements View.OnClickListener {
 
-
-    private LinearLayout Grades ,  Presence , Profile;
+    private LinearLayout registration1 ,  registration2 , list , placement;
     Button LogoutBtn;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_menu_student);
+        setContentView(R.layout.activity_menu_secretary);
 
+        registration1=findViewById(R.id.registration1) ;
+        registration1.setOnClickListener(this);
 
-        Grades=findViewById(R.id.Grades) ;
-        Grades.setOnClickListener(this);
+        registration2=findViewById(R.id.registration2);
+        registration2.setOnClickListener(this);
 
-        Presence=findViewById(R.id.Presence);
-        Presence.setOnClickListener(this);
+        list= findViewById(R.id.list);
+        list.setOnClickListener(this);
 
-        Profile= findViewById(R.id.Profile);
-        Profile.setOnClickListener(this);
-
-        Profile= findViewById(R.id.Lessons);
-        Profile.setOnClickListener(this);
+        placement= findViewById(R.id.placement);
+        placement.setOnClickListener(this);
 
         LogoutBtn = findViewById(R.id.LogoutBtn);
         LogoutBtn.setOnClickListener(this);
 
-
     }
 
+
     @Override
-    public void onClick(View v)
-    {
+    public void onClick(View v) {
         switch (v.getId())
         {
-            case R.id.Grades:
-                startActivity(new Intent(getApplicationContext(),gradesStudent.class));
+            case R.id.registration1:
+                startActivity(new Intent(this, StudentRegistration.class));
                 break;
-            case R.id.Presence:
-                startActivity(new Intent(getApplicationContext(),presenceStudent.class));
+            case R.id.registration2:
+                startActivity(new Intent(this, TeacherRegistration.class));
                 break;
-            case R.id.Profile:
-                startActivity(new Intent(this, profileStudent.class));
+            case R.id.list:
+                startActivity(new Intent(this, studentList.class));
                 break;
-            case  R.id.Lessons:
-                startActivity(new Intent(this, studentLessonsList.class));
+            case R.id.placement:
+                startActivity(new Intent(this, PlacementStudent.class));
                 break;
             case R.id.LogoutBtn:
-                AlertDialog.Builder builder=new AlertDialog.Builder(menuStudent.this); //Home is name of the activity
+                AlertDialog.Builder builder=new AlertDialog.Builder(menuSecretary.this); //Home is name of the activity
                 builder.setMessage("Do you want to exit?");
                 builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int id) {
                         FirebaseAuth.getInstance().signOut();
                         finish();
-                        Intent i=new Intent(menuStudent.this , signIn.class);
+                        Intent i=new Intent(menuSecretary.this , signIn.class);
                         i.putExtra("finish", true);
                         i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP); // To clean up all activities
                         startActivity(i);
@@ -92,9 +89,7 @@ public class menuStudent extends AppCompatActivity implements View.OnClickListen
 
 
                 break;
-
         }
-
     }
 
 }

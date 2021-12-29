@@ -1,4 +1,4 @@
-package com.example.myapp;
+package com.example.myapp.controller;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -7,14 +7,11 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
-import android.widget.SimpleAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
+import com.example.myapp.R;
+import com.example.myapp.view.menuTeacher;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -22,8 +19,6 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Objects;
 
 public class updatePresence extends AppCompatActivity implements View.OnClickListener{
@@ -157,7 +152,7 @@ public class updatePresence extends AppCompatActivity implements View.OnClickLis
                 break;
 
             case R.id.backBtn:
-                Intent i = new Intent(getApplicationContext(),menuTeacher.class);
+                Intent i = new Intent(getApplicationContext(), menuTeacher.class);
                 startActivity(i);
                 finish();
                 break;

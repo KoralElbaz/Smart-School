@@ -1,4 +1,4 @@
-package com.example.myapp;
+package com.example.myapp.controller;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -11,15 +11,13 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.firebase.auth.FirebaseAuth;
+import com.example.myapp.R;
+import com.example.myapp.view.menuTeacher;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-
-import java.util.HashMap;
 
 public class updateGrades extends AppCompatActivity implements View.OnClickListener {
 
@@ -113,7 +111,7 @@ public class updateGrades extends AppCompatActivity implements View.OnClickListe
                 break;
 
             case R.id.backBtn:
-                Intent i = new Intent(getApplicationContext(),menuTeacher.class);
+                Intent i = new Intent(getApplicationContext(), menuTeacher.class);
                 startActivity(i);
                 finish();
                 break;

@@ -1,6 +1,5 @@
-package com.example.myapp;
+package com.example.myapp.model;
 
-import java.util.List;
 import java.util.Map;
 
 public class Secretary {
@@ -11,8 +10,8 @@ public class Secretary {
     private String email;
     private String password;
     private final String type = "Secretary";
-    private Map<Class,Student> students;
-    private Map<Class,Teacher> teachers;
+    private Map<Class, Student> students;
+    private Map<Class, Teacher> teachers;
 
     public Secretary() {
     }

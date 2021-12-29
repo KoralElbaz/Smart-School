@@ -13,81 +13,81 @@
         android:usesCleartextTraffic="true">
 
         <activity
-            android:name=".updatePresence_levelTwo"
+            android:name=".controller.updatePresence_levelTwo"
             android:exported="false" />
         <activity
-            android:name=".TeacherStudentsListLevelTwo"
+            android:name=".view.TeacherStudentsListLevelTwo"
             android:exported="false" />
         <activity
-            android:name=".TeacherStudentsList"
+            android:name=".view.TeacherStudentsList"
             android:exported="false" />
         <activity
-            android:name=".studentLessonsList"
+            android:name=".view.studentLessonsList"
             android:exported="false" />
         <activity
-            android:name=".studentList2"
+            android:name=".view.studentList2"
             android:exported="false" />
         <activity
-            android:name=".PlacementStudent4"
+            android:name=".controller.PlacementStudent4"
             android:exported="false" />
         <activity
-            android:name=".PlacementStudent3"
+            android:name=".controller.PlacementStudent3"
             android:exported="false" />
         <activity
-            android:name=".PlacementStudent2"
+            android:name=".controller.PlacementStudent2"
             android:exported="false" />
         <activity
-            android:name=".PlacementStudent"
+            android:name=".controller.PlacementStudent"
             android:exported="false" />
         <activity
-            android:name=".studentList"
+            android:name=".view.studentList"
             android:exported="false" />
         <activity
-            android:name=".TeacherRegistration"
+            android:name=".controller.TeacherRegistration"
             android:exported="false" />
         <activity
-            android:name=".StudentRegistration"
+            android:name=".controller.StudentRegistration"
             android:exported="false" />
         <activity
-            android:name=".menuSecretary"
+            android:name=".view.menuSecretary"
             android:exported="false" />
         <activity
-            android:name=".updatePresence"
+            android:name=".controller.updatePresence"
             android:exported="false" />
         <activity
-            android:name=".updateGrades"
+            android:name=".controller.updateGrades"
             android:exported="false" />
         <activity
-            android:name=".presenceTeacher"
+            android:name=".controller.presenceTeacher"
             android:exported="false" />
         <activity
-            android:name=".profileTeacher"
+            android:name=".view.profileTeacher"
             android:exported="false" />
         <activity
-            android:name=".gradesTeacher"
+            android:name=".controller.gradesTeacher"
             android:exported="false" />
         <activity
-            android:name=".presenceStudent"
+            android:name=".view.presenceStudent"
             android:exported="false" />
         <activity
-            android:name=".profileStudent"
+            android:name=".view.profileStudent"
             android:exported="false" />
         <activity
-            android:name=".signIn"
+            android:name=".view.signIn"
             android:label="@string/app_name"
             android:exported="true" />
 
         <activity
-            android:name=".menuStudent"
+            android:name=".view.menuStudent"
             android:exported="true" />
         <activity
-            android:name=".menuTeacher"
+            android:name=".view.menuTeacher"
             android:exported="true" />
         <activity
-            android:name=".gradesStudent"
+            android:name=".view.gradesStudent"
             android:exported="false" />
         <activity
-            android:name=".updateGrade_levelTwo"
+            android:name=".controller.updateGrade_levelTwo"
             android:exported="false" />
 
     </application>

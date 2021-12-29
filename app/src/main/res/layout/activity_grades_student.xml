@@ -7,7 +7,7 @@
     android:background="@drawable/screen2"
     android:orientation="vertical"
     android:weightSum="10"
-    tools:context=".gradesStudent">
+    tools:context=".view.gradesStudent">
 
 
         <TextView

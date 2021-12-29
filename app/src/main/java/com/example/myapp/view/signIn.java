@@ -1,12 +1,10 @@
-package com.example.myapp;
+package com.example.myapp.view;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Trace;
-import android.util.JsonReader;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -14,8 +12,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.myapp.R;
+import com.example.myapp.model.Secretary;
 import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
@@ -25,11 +23,6 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 public class signIn extends AppCompatActivity implements View.OnClickListener {
 
@@ -114,13 +107,13 @@ public class signIn extends AppCompatActivity implements View.OnClickListener {
 
                             if(isTeacher) {
                                 Toast.makeText(signIn.this, "Login Teacher Successfully " , Toast.LENGTH_LONG).show();
-                                Intent i = new Intent(getApplicationContext(),menuTeacher.class);
+                                Intent i = new Intent(getApplicationContext(), menuTeacher.class);
                                 startActivity(i);
                             }
 
                             else { //its a student
                                 Toast.makeText(signIn.this, "Login Student Successfully " , Toast.LENGTH_LONG).show();
-                                Intent i = new Intent(getApplicationContext(),menuStudent.class);
+                                Intent i = new Intent(getApplicationContext(), menuStudent.class);
                                 startActivity(i);
                             }
                             finish();

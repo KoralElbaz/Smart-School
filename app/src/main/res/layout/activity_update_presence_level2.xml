@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".updatePresence_levelTwo"
+    tools:context=".controller.updatePresence_levelTwo"
     android:background="@drawable/screen2">
 
 

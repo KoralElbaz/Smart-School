@@ -1,19 +1,19 @@
 
-package com.example.myapp;
+package com.example.myapp.view;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
-import android.widget.Toast;
 
+import com.example.myapp.R;
+import com.example.myapp.controller.gradesTeacher;
+import com.example.myapp.controller.presenceTeacher;
 import com.google.firebase.auth.FirebaseAuth;
 
 public class menuTeacher extends AppCompatActivity implements View.OnClickListener{
