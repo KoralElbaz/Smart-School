@@ -159,6 +159,7 @@ public class updatePresence extends AppCompatActivity implements View.OnClickLis
             case R.id.backBtn:
                 Intent i = new Intent(getApplicationContext(),menuTeacher.class);
                 startActivity(i);
+                finish();
                 break;
         }
     }

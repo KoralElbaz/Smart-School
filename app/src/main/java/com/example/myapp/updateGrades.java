@@ -109,6 +109,7 @@ public class updateGrades extends AppCompatActivity implements View.OnClickListe
             case R.id.backBtn:
                 Intent i = new Intent(getApplicationContext(),menuTeacher.class);
                 startActivity(i);
+                finish();
                 break;
         }
     }

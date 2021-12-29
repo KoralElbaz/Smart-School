@@ -57,6 +57,7 @@ public class signIn extends AppCompatActivity implements View.OnClickListener {
         sAuth = FirebaseAuth.getInstance();
         fUser = sAuth.getCurrentUser();
 
+
         signInBtn=(Button) findViewById(R.id.signInBtn);
         signInBtn.setOnClickListener(this);
 
@@ -86,7 +87,7 @@ public class signIn extends AppCompatActivity implements View.OnClickListener {
                     loginSecretariat();
                 }
                 else
-                    { loginOther(); }
+                { loginOther(); }
                 break;
         }
     }
@@ -94,61 +95,53 @@ public class signIn extends AppCompatActivity implements View.OnClickListener {
 
     private void loginOther()
     {
-        Teachers.addListenerForSingleValueEvent(new ValueEventListener() {
+        sAuth.signInWithEmailAndPassword(email,pass).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot)
+            public void onComplete(@NonNull Task<AuthResult> task)
             {
-                for(DataSnapshot ds: snapshot.getChildren()){
-                    if (ds.hasChild(fUser.getUid()))
-                        isTeacher = true;
-                }
-                if (isTeacher) // is a teacher
+                if(task.isSuccessful())
                 {
-                    sAuth.signInWithEmailAndPassword(email,pass).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                    fUser = sAuth.getCurrentUser();
+                    Teachers.addValueEventListener(new ValueEventListener() {
                         @Override
-                        public void onComplete(@NonNull Task<AuthResult> task)
-                        {
-                            if(task.isSuccessful())
-                            {
+                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                            for(DataSnapshot ds: snapshot.getChildren()){
+                                if (fUser != null) {
+                                    if (ds.hasChild(fUser.getUid()))
+                                        isTeacher = true;
+                                }
+                            }
+
+                            if(isTeacher) {
                                 Toast.makeText(signIn.this, "Login Teachers Successfully " , Toast.LENGTH_LONG).show();
                                 Intent i = new Intent(getApplicationContext(),menuTeacher.class);
                                 startActivity(i);
                             }
-                            else
-                                {
-                                    Toast.makeText(signIn.this, "Login Teachers Unsuccessfully - Go to the Secretary  " , Toast.LENGTH_LONG).show();
-                                }
-                        }
-                    });
-                }
-                else // is a student
-                {
-                    sAuth.signInWithEmailAndPassword(email,pass).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                        @Override
-                        public void onComplete(@NonNull Task<AuthResult> task)
-                        {
-                            if(task.isSuccessful())
-                            {
+
+                            else { //its a student
                                 Toast.makeText(signIn.this, "Login Student Successfully " , Toast.LENGTH_LONG).show();
                                 Intent i = new Intent(getApplicationContext(),menuStudent.class);
                                 startActivity(i);
                             }
-                            else
-                            {
-                                Toast.makeText(signIn.this, "Login Student Unsuccessfully - Go to the Secretary" , Toast.LENGTH_LONG).show();
-                            }
+                            finish();
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
+
                         }
                     });
+
+
                 }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
+                else
+                {
+                    Toast.makeText(signIn.this, "Login Unsuccessfully - Go to the Secretary  " , Toast.LENGTH_LONG).show();
+                }
             }
         });
 
-        }
+    }
 
     private void loginSecretariat()
     {
@@ -156,57 +149,54 @@ public class signIn extends AppCompatActivity implements View.OnClickListener {
         {
 
             @Override
-            public void onComplete(@NonNull Task<AuthResult> task)
-            {
-                Secretary temp = new Secretary(fUser.getUid(),email,pass);
-                if (task.isSuccessful())
-                {
-                    Toast.makeText(signIn.this, "Login Secretariat Successfully " , Toast.LENGTH_LONG).show();
-                    Secretariat.addListenerForSingleValueEvent(new ValueEventListener()
-                    {
-                        @Override
-                        public void onDataChange(@NonNull DataSnapshot snapshot)
-                        {
-                            if (!snapshot.hasChild(fUser.getUid()))
-                            {
-                                Secretariat.child(fUser.getUid()).setValue(temp);
-                                Secretariat.child(fUser.getUid()).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
-                                    @Override
-                                    public void onComplete(@NonNull Task<DataSnapshot> task) {
-                                        if (task.isSuccessful())
-                                        {
-                                            Toast.makeText(signIn.this, "Welcome ", Toast.LENGTH_LONG).show();
-
-                                            Intent i = new Intent(getApplicationContext(),menuSecretary.class);
-                                            startActivity(i);
-                                        }
-                                    }
-                                });
-                            }
-                            else
-                                {
+            public void onComplete(@NonNull Task<AuthResult> task) {
+                fUser = sAuth.getCurrentUser();
+                if (fUser != null) {
+                    Secretary temp = new Secretary(fUser.getUid(), email, pass);
+                    if (task.isSuccessful()) {
+                        Toast.makeText(signIn.this, "Login Secretariat Successfully ", Toast.LENGTH_LONG).show();
+                        Secretariat.addListenerForSingleValueEvent(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                if (!snapshot.hasChild(fUser.getUid())) {
+                                    Secretariat.child(fUser.getUid()).setValue(temp);
                                     Secretariat.child(fUser.getUid()).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
                                         @Override
                                         public void onComplete(@NonNull Task<DataSnapshot> task) {
-                                            if (task.isSuccessful())
-                                            {
-                                                Toast.makeText(signIn.this, "Welcome Back" , Toast.LENGTH_LONG).show();
+                                            if (task.isSuccessful()) {
+                                                Toast.makeText(signIn.this, "Welcome ", Toast.LENGTH_LONG).show();
 
-                                                Intent i = new Intent(getApplicationContext(),menuSecretary.class);
+                                                Intent i = new Intent(getApplicationContext(), menuSecretary.class);
                                                 startActivity(i);
+                                                finish();
+                                            }
+                                        }
+                                    });
+                                } else {
+                                    Secretariat.child(fUser.getUid()).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+                                        @Override
+                                        public void onComplete(@NonNull Task<DataSnapshot> task) {
+                                            if (task.isSuccessful()) {
+                                                Toast.makeText(signIn.this, "Welcome Back", Toast.LENGTH_LONG).show();
+
+                                                Intent i = new Intent(getApplicationContext(), menuSecretary.class);
+                                                startActivity(i);
+                                                finish();
                                             }
                                         }
                                     });
 
+
+                                }
                             }
-                        }
-                        @Override
-                        public void onCancelled(@NonNull DatabaseError error) {  }
-                    });
-                }
-                else
-                {
-                    Toast.makeText(signIn.this, "Login Unsuccessfully", Toast.LENGTH_LONG).show();
+
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError error) {
+                            }
+                        });
+                    } else {
+                        Toast.makeText(signIn.this, "Login Unsuccessfully", Toast.LENGTH_LONG).show();
+                    }
                 }
             }
 

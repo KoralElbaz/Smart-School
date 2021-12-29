@@ -126,6 +126,7 @@ public class TeacherStudentsListLevelTwo extends AppCompatActivity implements Vi
         if(v.getId() == R.id.backBtn) {
             Intent i = new Intent(getApplicationContext(), menuTeacher.class);
             startActivity(i);
+            finish();
         }
     }
 }

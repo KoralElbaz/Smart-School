@@ -14,6 +14,8 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
+
 public class menuTeacher extends AppCompatActivity implements View.OnClickListener{
 
     private LinearLayout Grades ,  Presence , Profile,  StudentsList;
@@ -62,12 +64,12 @@ public class menuTeacher extends AppCompatActivity implements View.OnClickListen
                 builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int id) {
-
+                        FirebaseAuth.getInstance().signOut();
                         finish();
-                        Intent i=new Intent();
+                        Intent i=new Intent(menuTeacher.this , signIn.class);
                         i.putExtra("finish", true);
                         i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP); // To clean up all activities
-                        //startActivity(i);
+                        startActivity(i);
                         finish();
 
                     }
@@ -88,4 +90,5 @@ public class menuTeacher extends AppCompatActivity implements View.OnClickListen
 
         }
     }
+
 }

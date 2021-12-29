@@ -111,6 +111,7 @@ public class PlacementStudent4 extends AppCompatActivity{
                                             Toast.makeText(PlacementStudent4.this, "The Placement Successfully", Toast.LENGTH_LONG).show();
                                             Intent i = new Intent(getApplicationContext(),menuSecretary.class);
                                             startActivity(i);
+                                            finish();
                                         }
                                     });
                                 }

@@ -32,9 +32,6 @@ public class presenceStudent extends AppCompatActivity {
     private DatabaseReference Lessons;
     ListView listView;
 
-
-    private TextView course1, course2, course3, course4, course5;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,8 +42,6 @@ public class presenceStudent extends AppCompatActivity {
 
         Lessons = database.getReference("Lessons");
         listView = (ListView) findViewById(R.id.gradeslistview);
-
-        Toast.makeText(presenceStudent.this, "getUid: " + sAuth.getUid(), Toast.LENGTH_LONG).show();
 
 
         List<Map<String, String>> listArray = new ArrayList<>();

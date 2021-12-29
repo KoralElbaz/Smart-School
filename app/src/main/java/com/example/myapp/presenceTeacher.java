@@ -64,8 +64,6 @@ public class presenceTeacher extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id)
             {
 
-                Toast.makeText(presenceTeacher.this, "-> "+gradeList.get(position), Toast.LENGTH_SHORT).show();
-
                 Intent i = new Intent(getApplicationContext(),updatePresence_levelTwo.class);
                 i.putExtra("grade",gradeList.get(position));
                 startActivity(i);

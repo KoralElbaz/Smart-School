@@ -76,9 +76,6 @@ public class PlacementStudent2 extends AppCompatActivity {
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id)
                 {
-
-                    Toast.makeText(PlacementStudent2.this, "-> "+emailList.get(position), Toast.LENGTH_SHORT).show();
-
                     Intent i = new Intent(getApplicationContext(),PlacementStudent3.class);
                     i.putExtra("grade",grade);
                     i.putExtra("uid",uidList.get(position));

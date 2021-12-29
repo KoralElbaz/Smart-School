@@ -11,6 +11,8 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
+
 public class menuSecretary extends AppCompatActivity implements View.OnClickListener {
 
     private LinearLayout registration1 ,  registration2 , list , placement;
@@ -66,14 +68,13 @@ public class menuSecretary extends AppCompatActivity implements View.OnClickList
                 builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int id) {
-
+                        FirebaseAuth.getInstance().signOut();
                         finish();
-                        Intent i=new Intent();
+                        Intent i=new Intent(menuSecretary.this , signIn.class);
                         i.putExtra("finish", true);
                         i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP); // To clean up all activities
-                        //startActivity(i);
+                        startActivity(i);
                         finish();
-
                     }
                 });
 
@@ -91,4 +92,5 @@ public class menuSecretary extends AppCompatActivity implements View.OnClickList
                 break;
         }
     }
+
 }
