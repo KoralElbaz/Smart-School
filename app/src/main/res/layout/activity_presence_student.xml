@@ -30,7 +30,7 @@
         android:layout_height="match_parent"
         android:layout_below="@+id/gradesTitle"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="95dp"
         android:layout_marginEnd="20dp"
         android:layout_marginBottom="20dp" />
 

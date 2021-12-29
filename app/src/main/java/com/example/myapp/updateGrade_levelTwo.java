@@ -127,6 +127,7 @@ public class updateGrade_levelTwo extends AppCompatActivity {
                     i.putExtra("lessonName",lessonName);
                     i.putExtra("full_name",names.get(position));
                     startActivity(i);
+                    finish();
 
                 }
             });

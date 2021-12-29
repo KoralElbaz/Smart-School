@@ -39,11 +39,12 @@ public class PlacementStudent2 extends AppCompatActivity {
         student=new Student();
 
         ArrayList<String> emailList=new ArrayList<>();
+        ArrayList<String> namesList=new ArrayList<>();
         ArrayList<String> uidList=new ArrayList<>();
         Map<String,Student> studentMap=new HashMap<>();
 
 
-        ArrayAdapter arrayAdapter=new ArrayAdapter<>(this, android.R.layout.simple_list_item_1,emailList);
+        ArrayAdapter arrayAdapter=new ArrayAdapter<>(this, android.R.layout.simple_list_item_1,namesList);
 
         Intent intent = this.getIntent();
 
@@ -59,6 +60,7 @@ public class PlacementStudent2 extends AppCompatActivity {
                         emailList.add(student.getEmail());
                         uidList.add(student.getFbUID());
                         studentMap.put(student.getFbUID(),student);
+                        namesList.add(student.getFull_name());
 
 
                     }

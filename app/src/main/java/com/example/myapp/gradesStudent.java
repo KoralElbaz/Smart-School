@@ -47,8 +47,6 @@ public class gradesStudent extends AppCompatActivity {
         Lessons = database.getReference("Lessons");
         listView = (ListView) findViewById(R.id.gradeslistview);
 
-        Toast.makeText(gradesStudent.this, "getUid: " + sAuth.getUid(), Toast.LENGTH_LONG).show();
-
 
         List<Map<String, String>> listArray = new ArrayList<>();
 

@@ -113,7 +113,7 @@ public class signIn extends AppCompatActivity implements View.OnClickListener {
                             }
 
                             if(isTeacher) {
-                                Toast.makeText(signIn.this, "Login Teachers Successfully " , Toast.LENGTH_LONG).show();
+                                Toast.makeText(signIn.this, "Login Teacher Successfully " , Toast.LENGTH_LONG).show();
                                 Intent i = new Intent(getApplicationContext(),menuTeacher.class);
                                 startActivity(i);
                             }
@@ -164,8 +164,6 @@ public class signIn extends AppCompatActivity implements View.OnClickListener {
                                         @Override
                                         public void onComplete(@NonNull Task<DataSnapshot> task) {
                                             if (task.isSuccessful()) {
-                                                Toast.makeText(signIn.this, "Welcome ", Toast.LENGTH_LONG).show();
-
                                                 Intent i = new Intent(getApplicationContext(), menuSecretary.class);
                                                 startActivity(i);
                                                 finish();
@@ -177,8 +175,6 @@ public class signIn extends AppCompatActivity implements View.OnClickListener {
                                         @Override
                                         public void onComplete(@NonNull Task<DataSnapshot> task) {
                                             if (task.isSuccessful()) {
-                                                Toast.makeText(signIn.this, "Welcome Back", Toast.LENGTH_LONG).show();
-
                                                 Intent i = new Intent(getApplicationContext(), menuSecretary.class);
                                                 startActivity(i);
                                                 finish();

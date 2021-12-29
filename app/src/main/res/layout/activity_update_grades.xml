@@ -18,7 +18,7 @@
         android:gravity="center"
         android:text="Update Grade"
         android:textColor="@color/white"
-        android:textSize="42dp"
+        android:textSize="45dp"
         android:textStyle="bold"
         />
 
@@ -41,7 +41,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/title"
         android:layout_marginLeft="230dp"
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="107dp"
         android:text=""
         android:textSize="20sp"
         android:textStyle="bold"/>
@@ -65,7 +65,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/student_name"
         android:layout_marginLeft="200dp"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="37dp"
         android:text=""
         android:textSize="20sp"
         android:textStyle="bold"/>
@@ -97,6 +97,7 @@
         android:textColor="@color/black"
         android:textColorHint="@color/black"
         android:background="#30ffffff"
+        android:textStyle="bold"
         />
 
 

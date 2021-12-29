@@ -16,9 +16,9 @@
         android:layout_marginEnd="25dp"
         android:layout_marginBottom="25dp"
         android:gravity="center"
-        android:text="Placement Student"
+        android:text="Student placement"
         android:textColor="@color/white"
-        android:textSize="42dp"
+        android:textSize="45dp"
         android:textStyle="bold" />
 
 
@@ -27,11 +27,11 @@
         android:layout_height="wrap_content"
         android:id="@+id/row1"
         android:layout_below="@+id/title"
-        android:text="Select a Lesson:"
-        android:textSize="30dp"
+        android:text="Select Lesson:"
+        android:textSize="25dp"
         android:textStyle="bold"
-        android:layout_marginTop="90dp"
-        android:layout_marginLeft="30dp"/>
+        android:layout_marginTop="40dp"
+        android:layout_marginLeft="8dp"/>
 
 
 
@@ -41,7 +41,7 @@
         android:layout_height="match_parent"
         android:layout_below="@+id/row1"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="10dp"
         android:layout_marginEnd="20dp"
         android:layout_marginBottom="20dp" />
 

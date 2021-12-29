@@ -94,19 +94,17 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/Password"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="10dp"
-        android:layout_marginBottom="10dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
         android:background="#30ffffff"
-        android:drawableStart="@drawable/ic_baseline_lock_open_24"
+        android:drawableStart="@drawable/ic_baseline_school_24"
         android:drawablePadding="20dp"
         android:hint="Grade"
-        android:inputType="textPassword"
         android:padding="15dp"
         android:textColor="@color/white"
         android:textColorHint="@color/white" />
-
 
 
     <Button

@@ -5,7 +5,9 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 
 import com.google.firebase.database.DataSnapshot;
@@ -16,12 +18,13 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
-public class studentList2 extends AppCompatActivity {
+public class studentList2 extends AppCompatActivity implements View.OnClickListener{
 
     private FirebaseDatabase database;
     private DatabaseReference ClassRoom;
     private Student student;
     ListView listView;
+    private Button backbtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +35,9 @@ public class studentList2 extends AppCompatActivity {
         listView=(ListView) findViewById(R.id.listview);
         ClassRoom = database.getReference("ClassRoom");
         student=new Student();
+
+        backbtn = findViewById(R.id.backBtn);
+        backbtn.setOnClickListener(this);
 
         ArrayList<String> names=new ArrayList<>();
         ArrayList<String> uidList=new ArrayList<>();
@@ -64,5 +70,14 @@ public class studentList2 extends AppCompatActivity {
             });
         }
 
+    }
+
+    @Override
+    public void onClick(View v) {
+        if(v.getId() == R.id.backBtn) {
+            Intent i = new Intent(getApplicationContext(), menuSecretary.class);
+            startActivity(i);
+            finish();
+        }
     }
 }

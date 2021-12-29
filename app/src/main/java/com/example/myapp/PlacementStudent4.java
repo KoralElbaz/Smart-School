@@ -48,12 +48,13 @@ public class PlacementStudent4 extends AppCompatActivity{
         teacher=new Teacher();
 
         ArrayList<String> emailList=new ArrayList<>();
+        ArrayList<String> namesList=new ArrayList<>();
         ArrayList<String> uidList=new ArrayList<>();
         Map<String,Object> map=new HashMap<>();
 
 
 
-        ArrayAdapter arrayAdapter=new ArrayAdapter<>(this, android.R.layout.simple_list_item_1,emailList);
+        ArrayAdapter arrayAdapter=new ArrayAdapter<>(this, android.R.layout.simple_list_item_1,namesList);
 
         Intent intent = this.getIntent();
 
@@ -73,6 +74,7 @@ public class PlacementStudent4 extends AppCompatActivity{
                         teacher = ds.getValue(Teacher.class);
                         emailList.add(teacher.getEmail());
                         uidList.add(teacher.getFbUID());
+                        namesList.add(teacher.getFull_name());
 
 
                     }
@@ -92,33 +94,58 @@ public class PlacementStudent4 extends AppCompatActivity{
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id)
                 {
-
-                    HashMap hashMap=new HashMap();
-                    hashMap.put("Grade","No score");
-                    Lessons.child(Lesson_name).child("students_CourseGrade").child(uidStudent).updateChildren(hashMap).addOnSuccessListener(new OnSuccessListener() {
+                    Lessons.child(Lesson_name).addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
-                        public void onSuccess(Object o) {
-                            HashMap hashMap2=new HashMap();
-                            hashMap2.put("Absence","0");
-                            Lessons.child(Lesson_name).child("students_CourseGrade").child(uidStudent).updateChildren(hashMap2).addOnSuccessListener(new OnSuccessListener() {
-                                @Override
-                                public void onSuccess(Object o) {
-                                    HashMap hashMap3=new HashMap();
-                                    hashMap3.put(uidList.get(position),Lesson_name);
-                                    Lessons.child(Lesson_name).child("teacher_LessonName").updateChildren(hashMap3).addOnSuccessListener(new OnSuccessListener() {
+                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                            for (DataSnapshot ds:snapshot.getChildren())
+                            {
+                                if(!ds.hasChild(uidStudent))
+                                {
+                                    HashMap hashMap=new HashMap();
+                                    hashMap.put("Grade","No score");
+                                    Lessons.child(Lesson_name).child("students_CourseGrade").child(uidStudent).updateChildren(hashMap).addOnSuccessListener(new OnSuccessListener()
+                                    {
                                         @Override
                                         public void onSuccess(Object o) {
-                                            Toast.makeText(PlacementStudent4.this, "The Placement Successfully", Toast.LENGTH_LONG).show();
-                                            Intent i = new Intent(getApplicationContext(),menuSecretary.class);
-                                            startActivity(i);
-                                            finish();
+                                            HashMap hashMap2=new HashMap();
+                                            hashMap2.put("Absence","0");
+                                            Lessons.child(Lesson_name).child("students_CourseGrade").child(uidStudent).updateChildren(hashMap2).addOnSuccessListener(new OnSuccessListener()
+                                            {
+                                                @Override
+                                                public void onSuccess(Object o) {
+                                                    HashMap hashMap3=new HashMap();
+                                                    hashMap3.put(uidList.get(position),Lesson_name);
+                                                    Lessons.child(Lesson_name).child("teacher_LessonName").updateChildren(hashMap3).addOnSuccessListener(new OnSuccessListener() {
+                                                        @Override
+                                                        public void onSuccess(Object o) {
+                                                            Toast.makeText(PlacementStudent4.this, "The Registration Successfully", Toast.LENGTH_LONG).show();
+                                                            Intent i = new Intent(getApplicationContext(),menuSecretary.class);
+                                                            startActivity(i);
+                                                            finish();
+                                                        }
+                                                    });
+                                                }
+                                            });
+
                                         }
                                     });
                                 }
-                            });
+                                else {
+                                    Toast.makeText(PlacementStudent4.this, "The student is already enrolled in the course ", Toast.LENGTH_LONG).show();
+                                    Intent i = new Intent(getApplicationContext(),menuSecretary.class);
+                                    startActivity(i);
+                                    finish();
+                                }
+                            }
+
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
 
                         }
                     });
+
                 }
             });
         }

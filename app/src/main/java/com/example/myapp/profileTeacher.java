@@ -100,8 +100,6 @@ public class profileTeacher extends AppCompatActivity  {
         });
 
 
-        Toast.makeText(profileTeacher.this, "getUid: " + sAuth.getUid(), Toast.LENGTH_LONG).show();
-
 
         changeProfilePicture.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -47,19 +47,15 @@ public class menuSecretary extends AppCompatActivity implements View.OnClickList
         switch (v.getId())
         {
             case R.id.registration1:
-                Toast.makeText(menuSecretary.this, "1", Toast.LENGTH_SHORT).show();
                 startActivity(new Intent(this, StudentRegistration.class));
                 break;
             case R.id.registration2:
-                Toast.makeText(menuSecretary.this, "2", Toast.LENGTH_SHORT).show();
                 startActivity(new Intent(this, TeacherRegistration.class));
                 break;
             case R.id.list:
-                Toast.makeText(menuSecretary.this, "3", Toast.LENGTH_SHORT).show();
                 startActivity(new Intent(this, studentList.class));
                 break;
             case R.id.placement:
-                Toast.makeText(menuSecretary.this, "4", Toast.LENGTH_SHORT).show();
                 startActivity(new Intent(this, PlacementStudent.class));
                 break;
             case R.id.LogoutBtn:
