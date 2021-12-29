@@ -68,8 +68,6 @@ public class gradesTeacher extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id)
             {
 
-                Toast.makeText(gradesTeacher.this, "-> "+gradeList.get(position), Toast.LENGTH_SHORT).show();
-
                 Intent i = new Intent(getApplicationContext(),updateGrade_levelTwo.class);
                 i.putExtra("grade",gradeList.get(position));
                 startActivity(i);

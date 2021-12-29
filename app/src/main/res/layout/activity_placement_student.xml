@@ -16,7 +16,7 @@
         android:layout_marginEnd="25dp"
         android:layout_marginBottom="25dp"
         android:gravity="center"
-        android:text="Student placement"
+        android:text="course registration"
         android:textColor="@color/white"
         android:textSize="45dp"
         android:textStyle="bold"

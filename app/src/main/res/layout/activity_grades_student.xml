@@ -15,7 +15,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
-            android:text="Course Grades"
+            android:text="Course's Grades"
             android:textColor="@color/white"
             android:textSize="45dp"
             android:textStyle="bold"

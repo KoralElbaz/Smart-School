@@ -3,6 +3,7 @@ package com.example.myapp;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -87,6 +88,9 @@ public class TeacherRegistration extends AppCompatActivity implements View.OnCli
 
                     Teacher temp = new Teacher(fUser.getUid(),full_name,Long.parseLong(id),email,lesson_name,password);
                     Teachers.child(lesson_name).child(fUser.getUid()).setValue(temp);
+                    Intent i = new Intent(getApplicationContext(),menuSecretary.class);
+                    startActivity(i);
+                    finish();
                 }
                 else
                 {

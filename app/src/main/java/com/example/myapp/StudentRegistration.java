@@ -101,7 +101,9 @@ public class StudentRegistration extends AppCompatActivity implements View.OnCli
 
                         Student temp = new Student(fUser.getUid(),full_name,Long.parseLong(id),email,grade,password);
                         ClassRoom.child(grade).child(fUser.getUid()).setValue(temp);
-                        //ClassRoom.child(fUser.getUid()).setValue(temp);
+                        Intent i = new Intent(getApplicationContext(),menuSecretary.class);
+                        startActivity(i);
+                        finish();
                 }
                 else
                 {
