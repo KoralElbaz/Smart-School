@@ -1,4 +1,4 @@
-# Smart School
+# Smart School   
 
 ### this app will act as a bridge between the teacher to the student.
 
